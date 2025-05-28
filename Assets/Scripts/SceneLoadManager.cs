@@ -38,7 +38,7 @@ public class SceneLoadManager : MonoBehaviour
         Camera.main.clearFlags = CameraClearFlags.Skybox;
         Camera.main.backgroundColor = Color.white;
         SceneManager.SetActiveScene(s.Result.Scene);
-        
+
         passthroughLayer.enabled = false;
 
     }
@@ -50,7 +50,18 @@ public class SceneLoadManager : MonoBehaviour
         Camera.main.clearFlags = CameraClearFlags.SolidColor;
         Camera.main.backgroundColor = Color.clear;
         passthroughLayer.enabled = true;
-
+    }
+    public void SetMapIndex(object obj)
+    {
+        int index = (int)obj;
+        if (index >= 0 && index < Maps.Count)
+        {
+            mapIndex = index;
+        }
+        else
+        {
+            Debug.LogWarning("Map index out of range.");
+        }
     }
 
 }
