@@ -1,6 +1,6 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
@@ -10,6 +10,10 @@ public class SceneLoadManager : MonoBehaviour
     public OVRPassthroughLayer passthroughLayer;
     private AssetReference currentScene;
     public List<AssetReference> Maps;
+    public List<LevelTeleportPosSO> LevelTeleportPositions;
+    public GameObject Boat;
+    public Transform PlayerSittingPosition;
+    public Transform OVRrig;
     public int mapIndex = 0;
 
     public void ToggleScene()
@@ -38,10 +42,27 @@ public class SceneLoadManager : MonoBehaviour
         Camera.main.clearFlags = CameraClearFlags.Skybox;
         Camera.main.backgroundColor = Color.white;
         SceneManager.SetActiveScene(s.Result.Scene);
-
+        Boat.SetActive(true);
+        
+        OVRrig.parent = PlayerSittingPosition;
+        SetBoatPositionBaseOnIndex(mapIndex, 0);
         passthroughLayer.enabled = false;
 
     }
+
+    private void SetBoatPositionBaseOnIndex(int mapIndex, int TeleportIndex)
+    {
+
+        var teleportPositions = LevelTeleportPositions[mapIndex].teleportPositions;
+
+        var targetPos = teleportPositions[TeleportIndex].targetPos;
+        var targetRot = teleportPositions[TeleportIndex].targetRotation;
+
+        Boat.transform.position = targetPos.ToVector3();
+        Boat.transform.rotation = Quaternion.Euler(targetRot.ToVector3());
+    }
+
+
     private void UnloadScene()
     {
         SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
@@ -49,8 +70,15 @@ public class SceneLoadManager : MonoBehaviour
         currentScene = null;
         Camera.main.clearFlags = CameraClearFlags.SolidColor;
         Camera.main.backgroundColor = Color.clear;
+
+        Boat.transform.position = Vector3.zero;
+        Boat.transform.rotation = Quaternion.identity;
+        Boat.SetActive(false);
+        OVRrig.parent = null;
         passthroughLayer.enabled = true;
     }
+
+
     public void SetMapIndex(object obj)
     {
         int index = (int)obj;
