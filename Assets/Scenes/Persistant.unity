@@ -7185,7 +7185,6 @@ MonoBehaviour:
   pointATransform: {fileID: 604290103}
   pointBTransform: {fileID: 1792340307}
   vrCamera: {fileID: 468913468}
-  debugBoxPrefab: {fileID: 0}
 --- !u!4 &565413076
 Transform:
   m_ObjectHideFlags: 0
