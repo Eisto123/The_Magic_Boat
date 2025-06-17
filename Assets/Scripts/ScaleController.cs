@@ -28,7 +28,7 @@ public class ScaleController : MonoBehaviour
         currentScale = transform.localScale;
         currentScale.x = GetClosestLevel(currentScale.x, scaleLevel);
         currentScale.z = currentScale.x;
-        currentScale.y = currentScale.x;
+        currentScale.y = currentScale.x/0.1f * 0.15f;
         currentLevel = System.Array.IndexOf(scaleLevel, currentScale.x);
         transform.DOScale(currentScale, 0.2f).SetEase(Ease.OutBack);
         Debug.Log(currentLevel);
