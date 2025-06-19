@@ -15,6 +15,7 @@ public class SceneLoadManager : MonoBehaviour
     public Transform PlayerSittingPosition;
     public Transform OVRrig;
     public int mapIndex = 0;
+    public int teleportIndex = 0;
 
     public void ToggleScene()
     {
@@ -43,9 +44,9 @@ public class SceneLoadManager : MonoBehaviour
         Camera.main.backgroundColor = Color.white;
         SceneManager.SetActiveScene(s.Result.Scene);
         Boat.SetActive(true);
-        
+
         OVRrig.parent = PlayerSittingPosition;
-        SetBoatPositionBaseOnIndex(mapIndex, 0);
+        SetBoatPositionBaseOnIndex(mapIndex, teleportIndex);
         passthroughLayer.enabled = false;
 
     }
@@ -89,6 +90,19 @@ public class SceneLoadManager : MonoBehaviour
         else
         {
             Debug.LogWarning("Map index out of range.");
+        }
+    }
+    
+    public void SetTeleportIndex(object obj)
+    {
+        int index = (int)obj;
+        if (index >= 0 && index < LevelTeleportPositions[mapIndex].teleportPositions.Count)
+        {
+            teleportIndex = index;
+        }
+        else
+        {
+            Debug.LogWarning("Teleport index out of range.");
         }
     }
 

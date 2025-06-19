@@ -22,3 +22,12 @@ MonoBehaviour:
       x: 0
       y: -90
       z: 0
+  - positionName: Bottom_02
+    targetPos:
+      x: -5
+      y: 0.6
+      z: 15
+    targetRotation:
+      x: 0
+      y: -90
+      z: 0
