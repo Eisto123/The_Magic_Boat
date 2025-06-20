@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
@@ -16,6 +17,7 @@ public class SceneLoadManager : MonoBehaviour
     public Transform OVRrig;
     public int mapIndex = 0;
     public int teleportIndex = 0;
+    public GameObject FadeMask;
 
     public void ToggleScene()
     {
@@ -32,14 +34,22 @@ public class SceneLoadManager : MonoBehaviour
 
     private void LoadScene(AssetReference scene)
     {
-
+        
         currentScene = scene;
+        FadeMask.GetComponent<MeshRenderer>().material.DOFloat(0.6f, "_CutoffHeight", 0.5f).SetEase(Ease.InOutSine);
+        FadeMask.GetComponent<MeshRenderer>().material.DOFloat(1, "_Alpha", 0.5f).SetEase(Ease.InOutSine);
         StartCoroutine(LoadSceneProcess());
     }
     IEnumerator LoadSceneProcess()
     {
         var s = currentScene.LoadSceneAsync(LoadSceneMode.Additive);
         yield return new WaitUntil(() => s.IsDone);
+        FadeMask.transform.DOScale(new Vector3(100, 100, 100), 5f).SetEase(Ease.InOutSine);
+        FadeMask.GetComponent<MeshRenderer>().material.DOFloat(0, "_Alpha", 5f).SetEase(Ease.InOutSine).onComplete = () =>
+        {
+            FadeMask.transform.localScale = Vector3.one;
+            FadeMask.GetComponent<MeshRenderer>().material.SetFloat("_CutoffHeight", -0.6f);
+        };
         Camera.main.clearFlags = CameraClearFlags.Skybox;
         Camera.main.backgroundColor = Color.white;
         SceneManager.SetActiveScene(s.Result.Scene);
@@ -48,6 +58,7 @@ public class SceneLoadManager : MonoBehaviour
         OVRrig.parent = PlayerSittingPosition;
         SetBoatPositionBaseOnIndex(mapIndex, teleportIndex);
         passthroughLayer.enabled = false;
+        
 
     }
 
