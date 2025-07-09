@@ -10,24 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8cdf437337865f94f8cf377705098701, type: 3}
-  m_Name: LevelTeleportPosSO
+  m_Name: MidSeaTeleportPos
   m_EditorClassIdentifier: 
   teleportPositions:
   - positionName: Start
     targetPos:
-      x: 15.71
+      x: 103
       y: 0.6
-      z: -18.09
+      z: 81
     targetRotation:
       x: 0
-      y: -90
-      z: 0
-  - positionName: Bottom_02
-    targetPos:
-      x: -5
-      y: 0.6
-      z: 15
-    targetRotation:
-      x: 0
-      y: -90
+      y: 110
       z: 0
