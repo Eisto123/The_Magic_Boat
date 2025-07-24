@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 0e3ac3183fecbaf49826aa372f4dcd0e
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 625f186215c104763be7675aa2d941aa, type: 3}
+AssetOrigin:
+  serializedVersion: 1
+  productId: 221724
+  packageName: Cartoon Grass and Plants
+  packageVersion: 1.02
+  assetPath: Assets/CartoonGrass/Shaders/CartoonGrass_Grass_LOD2.shadergraph
+  uploadId: 702317
