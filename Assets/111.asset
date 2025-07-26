@@ -10,34 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 612e70f49e5124da0a95111a57250300, type: 3}
-  m_Name: InteriorDemoProfile
+  m_Name: 111
   m_EditorClassIdentifier: 
-  raymarchQuality: 12
+  raymarchQuality: 6
   raymarchMinStep: 0.1
   jittering: 0.5
-  dithering: 0.5
+  dithering: 1
   renderQueue: 3100
   sortingLayerID: 0
   sortingOrder: 0
   constantDensity: 0
   noiseTexture: {fileID: 2800000, guid: 9c79340e1a1054275ba04070a27de306, type: 3}
   noiseTextureOptimizedSize: 256
-  noiseStrength: 1.8
-  noiseScale: 20
-  noiseFinalMultiplier: 0.63
-  useDetailNoise: 1
+  noiseStrength: 1
+  noiseScale: 15
+  noiseFinalMultiplier: 1
+  useDetailNoise: 0
   detailTexture: {fileID: 11700000, guid: 950add8d241c6479bbab1f10e1035d60, type: 2}
-  detailScale: 1.25
-  detailStrength: 0.464
+  detailScale: 0.35
+  detailStrength: 0.5
   detailOffset: -0.5
-  density: 0.3
+  density: 1
   shape: 0
   border: 0.05
   customHeight: 0
   height: 0
   verticalOffset: 0
   distance: 0
-  distanceFallOff: 0
+  distanceFallOff: 0.93
   maxDistance: 10000
   maxDistanceFallOff: 0
   terrainFit: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
   terrainFogHeight: 25
   terrainFogMinAltitude: 0
   terrainFogMaxAltitude: 150
-  albedo: {r: 0.55378425, g: 0.6625587, b: 0.7283019, a: 0.8}
+  albedo: {r: 0.7132075, g: 0.7132075, b: 0.7132075, a: 1}
   enableDepthGradient: 0
   depthGradient:
     serializedVersion: 2
@@ -81,7 +81,7 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   depthGradientMaxDistance: 1000
-  enableHeightGradient: 1
+  enableHeightGradient: 0
   heightGradient:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
@@ -109,20 +109,20 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_ColorSpace: 1
+    m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   brightness: 1
-  deepObscurance: 1.362
+  deepObscurance: 1
   specularColor: {r: 1, g: 1, b: 0.8, a: 1}
   specularThreshold: 0.637
   specularIntensity: 0.428
-  turbulence: 0
-  windDirection: {x: 0, y: -0.05, z: -0.05}
+  turbulence: 0.73
+  windDirection: {x: 0.02, y: 0, z: 0}
   useCustomDetailNoiseWindDirection: 0
   detailNoiseWindDirection: {x: 0.02, y: 0, z: 0}
-  dayNightCycle: 0
-  sunDirection: {x: 0, y: 1, z: 0.22}
+  dayNightCycle: 1
+  sunDirection: {x: 0, y: 1, z: 0}
   sunColor: {r: 0, g: 0.9568, b: 0.8392, a: 1}
   sunIntensity: 1
   ambientLightMultiplier: 0
