@@ -135,9 +135,9 @@ Material:
     - _SrcBlendAlpha: 1
     - _Surface: 0
     - _WaterDepth: 10
-    - _WaveAmplitude: 0.05
-    - _WaveFrequency: 3
-    - _WaveSpeed: 2
+    - _WaveAmplitude: 0.02
+    - _WaveFrequency: 2
+    - _WaveSpeed: 1
     - _WorkflowMode: 1
     - _ZWrite: 1
     - _strength: 0
