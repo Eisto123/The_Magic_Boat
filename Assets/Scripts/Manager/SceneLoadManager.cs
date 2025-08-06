@@ -17,7 +17,6 @@ public class SceneLoadManager : MonoBehaviour
     public Transform OVRrig;
     public int mapIndex = 0;
     public int teleportIndex = 0;
-    public GameObject FadeMask;
 
     public void ToggleScene()
     {
@@ -36,16 +35,6 @@ public class SceneLoadManager : MonoBehaviour
     {
         
         currentScene = scene;
-        FadeMask.GetComponent<MeshRenderer>().material.DOFloat(0.6f, "_CutoffHeight", 0.5f).SetEase(Ease.InOutSine);
-        FadeMask.GetComponent<MeshRenderer>().material.DOFloat(1, "_Alpha", 0.5f).SetEase(Ease.InOutSine).OnComplete(() =>
-        {
-            FadeMask.transform.DOScale(new Vector3(100, 100, 100), 3f).SetEase(Ease.InOutSine);
-            FadeMask.GetComponent<MeshRenderer>().material.DOFloat(0, "_Alpha", 3f).SetEase(Ease.InOutSine).onComplete = () =>
-            {
-                FadeMask.transform.localScale = Vector3.one;
-                FadeMask.GetComponent<MeshRenderer>().material.SetFloat("_CutoffHeight", -0.6f);
-            };
-        });
         StartCoroutine(LoadSceneProcess());
     }
     IEnumerator LoadSceneProcess()
