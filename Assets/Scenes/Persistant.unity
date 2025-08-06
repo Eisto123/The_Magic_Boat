@@ -28269,7 +28269,7 @@ MonoBehaviour:
   turnAngle: 30
   turnTorque: 33
   turnDuration: 1
-  maxSpeed: 25
+  maxSpeed: 35
   breakForce: 10
 --- !u!4 &8053026141682111581
 Transform:
