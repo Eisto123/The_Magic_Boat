@@ -70,8 +70,8 @@ Material:
     - WindStrength: 0.25
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _GradientHeight: 0.85
-    - _GradientSmoothness: 1
+    - _GradientHeight: 10.81
+    - _GradientSmoothness: 1.57
     - _Offset: 0.34
     - _QueueControl: 0
     - _QueueOffset: 0
