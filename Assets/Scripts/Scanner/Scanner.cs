@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Oculus.Interaction.PoseDetection;
+using Oculus.Platform;
 using UnityEngine;
 
 public class Scanner : MonoBehaviour
@@ -14,8 +16,10 @@ public class Scanner : MonoBehaviour
     public Transform pointATransform;
     public Transform pointBTransform;
     public Camera vrCamera;
+    public TransformRecognizerActiveState leftWrist;
     private bool isScanning = false;
     private HashSet<Collectable> previouslyDetected = new HashSet<Collectable>();
+    private List<(Vector3 center, Vector3 halfExtents, Quaternion rotation)> debugBoxes = new List<(Vector3, Vector3, Quaternion)>();
     public void Scan()
     {
         isScanning = true;
@@ -28,7 +32,7 @@ public class Scanner : MonoBehaviour
     {
         if (isScanning)
         {
-            DetectObjectsInVolume(pointATransform, pointBTransform);
+            DetectObjectsInVolume(pointATransform, pointBTransform, leftWrist.Active);
         }
     }
 
@@ -42,20 +46,20 @@ public class Scanner : MonoBehaviour
         Debug.Log("Stopping scan...");
     }
 
-    void DetectObjectsInVolume(Transform leftHand, Transform rightHand)
+    void DetectObjectsInVolume(Transform leftHand, Transform rightHand,bool leftHandUp)
     {
-        
+        debugBoxes.Clear(); // Clear previous frames
         Vector3 center = (leftHand.position + rightHand.position) * 0.5f;
-        Vector3 right = leftHand.right.normalized;
-        Vector3 up = Vector3.Cross(right, vrCamera.transform.forward).normalized;
-        Vector3 forward = vrCamera.transform.forward.normalized;
+        Vector3 right = leftHandUp? -leftHand.right.normalized : leftHand.right.normalized;
+        Vector3 up = vrCamera.transform.up.normalized;
+        //Vector3 forward = vrCamera.transform.forward.normalized;
 
-        float initialWidth = Vector3.Dot(rightHand.position - leftHand.position, right);
-        float initialHeight = Vector3.Dot(rightHand.position - leftHand.position, up);
+        float initialWidth = Mathf.Abs(Vector3.Dot(rightHand.position - leftHand.position, right));
+        float initialHeight = Mathf.Abs(Vector3.Dot(rightHand.position - leftHand.position, up));
         float heightWidthPercentage = initialWidth / initialHeight;
 
         //Debug.Log($"Initial Width: {initialWidth}, Initial Height: {initialHeight}, Height/Width Percentage: {heightWidthPercentage}");
-        
+
 
         float depthDistance = volumeDepth / resolution;
         float k = Mathf.Tan(vrCamera.fieldOfView * 0.5f * Mathf.Deg2Rad);
@@ -77,7 +81,7 @@ public class Scanner : MonoBehaviour
 
             // GameObject box = Instantiate(debugBoxPrefab, scanCenter, rotation);
             // box.transform.localScale = halfExtents * 2f;
-
+            debugBoxes.Add((scanCenter, halfExtents, rotation)); // Store for gizmo drawing
             // Perform overlap box
             Collider[] boxHits = Physics.OverlapBox(scanCenter, halfExtents, rotation, interactableMask);
             hits.AddRange(boxHits);
@@ -106,5 +110,17 @@ public class Scanner : MonoBehaviour
 
         previouslyDetected = currentlyDetected;
     }
+    
+    void OnDrawGizmos()
+{
+    if (!drawDebugBox || debugBoxes == null) return;
+    Gizmos.color = Color.cyan;
+    foreach (var box in debugBoxes)
+    {
+        Matrix4x4 cubeTransform = Matrix4x4.TRS(box.center, box.rotation, box.halfExtents * 2f);
+        Gizmos.matrix = cubeTransform;
+        Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
+    }
+}
 
 }
