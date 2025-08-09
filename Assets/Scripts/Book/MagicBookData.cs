@@ -8,12 +8,23 @@ public class BookData
     public string levelName;
     public string levelDescription;
     public Sprite levelImage;
-    public string item;
-    public string buffItems;
+    public List<ElementCollectable> collectables;
+
 }
 
-[CreateAssetMenu(fileName = "MagicBookData", menuName = "ScriptableObjects/MagicBookData", order = 1)]
-public class MagicBookDataSO : ScriptableObject
+[System.Serializable]
+public class ElementCollectable
 {
-    public BookData bookData;
+    public string name;
+    public Sprite image;
+    public Element elementType;
+    public bool isCollected = false;
+}
+
+
+
+[CreateAssetMenu(fileName = "MagicBookData", menuName = "ScriptableObjects/MagicBookData", order = 1)]
+public class MagicBookData : ScriptableObject
+{
+    public List<BookData> bookDatas;
 }

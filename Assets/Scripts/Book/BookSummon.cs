@@ -119,7 +119,7 @@ public class BookSummon : MonoBehaviour
         {
             Book.SetActive(true);
             Book.transform.position = summonPoint.position + summonPoint.forward * 0.4f;
-            Book.transform.LookAt(summonPoint);
+            Book.transform.LookAt(Book.transform.position + (Book.transform.position - summonPoint.position));
             Book.transform.rotation = Quaternion.Euler(15, Book.transform.rotation.eulerAngles.y, 0);
             Debug.Log("Book summoned successfully!");
             summonComplete = false; // Reset for next summon

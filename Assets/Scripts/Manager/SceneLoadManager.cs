@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoadManager : MonoBehaviour
 {
+    
     public OVRPassthroughLayer passthroughLayer;
     private AssetReference currentScene;
     public List<AssetReference> Maps;
@@ -15,7 +16,7 @@ public class SceneLoadManager : MonoBehaviour
     public GameObject Boat;
     public Transform PlayerSittingPosition;
     public Transform OVRrig;
-    public int mapIndex = 0;
+    public static int mapIndex = 0;
     public int teleportIndex = 0;
 
     public void ToggleScene()
