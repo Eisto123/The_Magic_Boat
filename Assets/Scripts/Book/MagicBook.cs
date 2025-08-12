@@ -13,7 +13,7 @@ public class MagicBook : MonoBehaviour
 
     void OnEnable()
     {
-        
+
         transform.localScale = Vector3.one * 0.01f; // Reset scale to a small value
         SetUpBookUI(SceneLoadManager.mapIndex);
         transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack).OnComplete(() =>
@@ -41,5 +41,11 @@ public class MagicBook : MonoBehaviour
 
         BookData bookData = magicBookData.bookDatas[bookIndex];
         magicBookUI.UpdateBookUI(bookData);
+    }
+
+    public void UpdateBookUI()
+    {
+        int bookIndex = SceneLoadManager.mapIndex;
+        SetUpBookUI(bookIndex);
     }
 }

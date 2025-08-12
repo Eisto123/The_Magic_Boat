@@ -14,6 +14,7 @@ public class MagicBookUI : MonoBehaviour
     public TMP_Text collectablesText;
     public TMP_Text collectablesDescriptionText;
     public Image collectablesImage;
+    public Toggle collectablesToggle;
 
 
     public void UpdateBookUI(BookData bookData)
@@ -31,12 +32,13 @@ public class MagicBookUI : MonoBehaviour
 
         foreach (var collectable in bookData.collectables)
         {
-            collectablesDescriptionText.text += collectable.name;
+
             collectablesDescriptionText.text += collectable.elementType.ToString() + "\n";
             if (collectable.image != null)
             {
                 collectablesImage.sprite = collectable.image;
             }
+            collectablesToggle.isOn = collectable.isCollected;
         }
     }
 }

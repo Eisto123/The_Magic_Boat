@@ -27,11 +27,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ecce7c5101b6a3646bd44909b59b09b1
-    m_Address: Assets/Model/VR/VR_1.fbx
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f34285a380c35594eac85ec60663e75d
     m_Address: VRLevel 1
     m_ReadOnly: 0

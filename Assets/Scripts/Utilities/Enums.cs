@@ -1,4 +1,6 @@
-public enum Element{
+
+public enum Element
+{
     Fire,
     Water,
     Earth,

@@ -1,7 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using Oculus.Interaction.PoseDetection;
-using Oculus.Platform;
 using UnityEngine;
+using DG.Tweening;
 
 public class Scanner : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Scanner : MonoBehaviour
     public Transform pointATransform;
     public Transform pointBTransform;
     public Camera vrCamera;
+    public GameObject CameraRig;
     public TransformRecognizerActiveState leftWrist;
     private bool isScanning = false;
     private HashSet<Collectable> previouslyDetected = new HashSet<Collectable>();
@@ -41,8 +43,10 @@ public class Scanner : MonoBehaviour
         isScanning = false;
         foreach (Collectable collectable in previouslyDetected)
         {
-            collectable.isCollected = false; // Reset collection status
+            if(collectable == null) continue;
+            if (!collectable.isCollected) collectable.StopCollect();
         }
+        previouslyDetected.Clear();
         Debug.Log("Stopping scan...");
     }
 
@@ -95,7 +99,11 @@ public class Scanner : MonoBehaviour
             if (collectable != null)
             {
                 currentlyDetected.Add(collectable);
-                collectable.isCollected = true; // Mark as collected
+                if (!collectable.duringCollect && !collectable.isCollected)
+                {
+                    collectable.StartCollect();
+                }
+                
             }
         }
 
@@ -104,11 +112,38 @@ public class Scanner : MonoBehaviour
         {
             if (!currentlyDetected.Contains(old))
             {
-                old.isCollected = false; // Reset collection status
+                if (old != null && !old.isCollected)
+                old.StopCollect();
             }
         }
 
         previouslyDetected = currentlyDetected;
+    }
+
+    private Vector3 originalRigPosition;
+    private Tween rigMoveTween;
+
+    public void MoveRigToObject(object Position)
+    {
+        Vector3 targetPosition = (Vector3)Position;
+        if (rigMoveTween != null && rigMoveTween.IsActive())
+            rigMoveTween.Kill();
+        originalRigPosition = CameraRig.transform.position;
+
+        // Calculate a point 5% of the way toward the target
+        Vector3 moveTarget = Vector3.Lerp(originalRigPosition, targetPosition, 0.02f);
+
+        rigMoveTween = CameraRig.transform.DOMove(moveTarget, 2.0f)
+            .SetEase(Ease.OutCirc);
+    }
+
+    // Call this when scan stops
+    public void ResetRigPosition()
+    {
+        if (rigMoveTween != null && rigMoveTween.IsActive())
+            rigMoveTween.Kill();
+        rigMoveTween = CameraRig.transform.DOMove(originalRigPosition, 2.0f)
+            .SetEase(Ease.OutCirc);
     }
     
     void OnDrawGizmos()
