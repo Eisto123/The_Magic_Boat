@@ -16,7 +16,7 @@ MonoBehaviour:
   - positionName: start
     targetPos:
       x: 4
-      y: 1
+      y: 1.2
       z: -30
     targetRotation:
       x: 0

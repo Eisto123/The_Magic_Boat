@@ -17,6 +17,11 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: a3309a247a0b06846a5cba84e7171089
   m_SerializeEntries:
+  - m_GUID: 44b0712be1b44f6429375aa09bdef247
+    m_Address: AR
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bb2bb209c12993b41a6072e122f3a2ce
     m_Address: VRLevel 4
     m_ReadOnly: 0
