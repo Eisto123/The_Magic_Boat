@@ -12,6 +12,7 @@ public class SceneLoadManager : MonoBehaviour
     public OVRPassthroughLayer passthroughLayer;
     private AssetReference currentScene;
     public List<AssetReference> Maps;
+    public AssetReference ARMode;
     public List<LevelTeleportPosSO> LevelTeleportPositions;
     public GameObject Boat;
     public Transform PlayerSittingPosition;
@@ -19,26 +20,38 @@ public class SceneLoadManager : MonoBehaviour
     public static int mapIndex = 0;
     public int teleportIndex = 0;
 
+    void Start()
+    {
+        LoadScene(ARMode);
+        currentScene = ARMode;
+    }
     public void ToggleScene()
     {
-        if (currentScene == null)
+        UnloadScene();
+        if (currentScene == ARMode)
         {
             LoadScene(Maps[mapIndex]);
         }
         else
         {
-            UnloadScene();
+            LoadScene(ARMode);
         }
 
     }
 
     private void LoadScene(AssetReference scene)
     {
-        
         currentScene = scene;
-        StartCoroutine(LoadSceneProcess());
+        if (currentScene == ARMode)
+        {
+            StartCoroutine(LoadARSceneProcess());
+        }
+        else
+        {
+            StartCoroutine(LoadVRSceneProcess());
+        }
     }
-    IEnumerator LoadSceneProcess()
+    IEnumerator LoadVRSceneProcess()
     {
         var s = currentScene.LoadSceneAsync(LoadSceneMode.Additive);
         yield return new WaitUntil(() => s.IsDone);
@@ -47,13 +60,18 @@ public class SceneLoadManager : MonoBehaviour
         Camera.main.backgroundColor = Color.white;
         SceneManager.SetActiveScene(s.Result.Scene);
         Boat.SetActive(true);
-
+        
         OVRrig.parent = PlayerSittingPosition;
         SetBoatPositionBaseOnIndex(mapIndex, teleportIndex);
-        passthroughLayer.enabled = false;
-        
-
+        passthroughLayer.textureOpacity = 0;
     }
+    IEnumerator LoadARSceneProcess()
+    {
+        var s = currentScene.LoadSceneAsync(LoadSceneMode.Additive);
+        yield return new WaitUntil(() => s.IsDone);
+        SceneManager.SetActiveScene(s.Result.Scene);
+    }
+
 
     private void SetBoatPositionBaseOnIndex(int mapIndex, int TeleportIndex)
     {
@@ -72,7 +90,6 @@ public class SceneLoadManager : MonoBehaviour
     {
         SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
         currentScene.ReleaseAsset();
-        currentScene = null;
         Camera.main.clearFlags = CameraClearFlags.SolidColor;
         Camera.main.backgroundColor = Color.clear;
 
@@ -80,7 +97,7 @@ public class SceneLoadManager : MonoBehaviour
         Boat.transform.rotation = Quaternion.identity;
         Boat.SetActive(false);
         OVRrig.parent = null;
-        passthroughLayer.enabled = true;
+        passthroughLayer.textureOpacity = 1;
     }
 
 
