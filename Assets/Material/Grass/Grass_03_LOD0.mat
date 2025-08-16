@@ -81,6 +81,6 @@ Material:
     - BottomColor: {r: 0.29354417, g: 0.4528302, b: 0.13100746, a: 0}
     - TopColor: {r: 0.53873, g: 0.7075472, b: 0.27144888, a: 0}
     - WindDirection: {r: 1, g: 0, b: 0, a: 0}
-    - _BottomColor: {r: 0.12941177, g: 0.4509804, b: 0.4114397, a: 0}
-    - _TopColor: {r: 0.27058825, g: 0.7058824, b: 0.5957106, a: 0}
+    - _BottomColor: {r: 0.090060495, g: 0.51140356, b: 0.5245282, a: 0}
+    - _TopColor: {r: 0.28490567, g: 1, b: 0.6399481, a: 0}
   m_BuildTextureStacks: []
