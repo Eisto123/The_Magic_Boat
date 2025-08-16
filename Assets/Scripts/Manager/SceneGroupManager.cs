@@ -14,23 +14,26 @@ public class SceneGroupManager
     public event Action<String> OnSceneLoaded = delegate { };
     public event Action<String> OnSceneUnloaded = delegate { };
     public Action OnSceneGroupLoaded = delegate { };
-
     public SceneGroup CurrentSceneGroup { get; private set; }
     public AsyncOperationHandleGroup CurrentSceneHandles { get; private set; } = new AsyncOperationHandleGroup(10);
 
-    public async Task LoadScene(SceneData sceneData, IProgress<float> progress)
+    public async Task<AsyncOperationHandle<SceneInstance>> LoadScene(SceneData sceneData, IProgress<float> progress, bool activateOnLoad)
     {
-        var handle = sceneData.sceneReference.LoadSceneAsync(LoadSceneMode.Additive);
+        var handle = sceneData.sceneReference.LoadSceneAsync(LoadSceneMode.Additive, activateOnLoad);
         CurrentSceneHandles.Handles.Add(handle);
+
+        // Wait for loading to finish (but not activated if activateOnLoad is false)
         while (!handle.IsDone)
         {
-            progress.Report(handle.PercentComplete);
             await Task.Delay(100);
         }
+
         if (handle.Status == AsyncOperationStatus.Succeeded)
         {
             OnSceneLoaded?.Invoke(sceneData.sceneName);
         }
+
+        return handle;
     }
     public async Task UnloadScene(SceneData sceneData, IProgress<float> progress)
     {

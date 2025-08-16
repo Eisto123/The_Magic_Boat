@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -8,7 +10,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoadManager : MonoBehaviour
 {
-    
+    public static SceneLoadManager instance;
     public OVRPassthroughLayer passthroughLayer;
     private AssetReference currentScene;
     public List<AssetReference> Maps;
@@ -17,9 +19,31 @@ public class SceneLoadManager : MonoBehaviour
     public GameObject Boat;
     public Transform PlayerSittingPosition;
     public Transform OVRrig;
+
+    [Header("FadeMask")]
+    public GameObject WhiteFadeMask;
+    public GameObject DepthMask;
+    public Camera MainCamera;
+    private float originalFarClipPlane;
+    private bool fadeInisDone = false;
+    private int _AphaForDepthMask = Shader.PropertyToID("_Alpha");
+    public ObjectEventSO FadeInMaskCompleteEvent;
+
+
     public static int mapIndex = 0;
     public int teleportIndex = 0;
-
+    private SceneLoader currentSceneLoader;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     void Start()
     {
         LoadScene(ARMode);
@@ -27,9 +51,11 @@ public class SceneLoadManager : MonoBehaviour
     }
     public void ToggleScene()
     {
+        
         UnloadScene();
         if (currentScene == ARMode)
         {
+            FadeInMask();
             LoadScene(Maps[mapIndex]);
         }
         else
@@ -55,12 +81,17 @@ public class SceneLoadManager : MonoBehaviour
     {
         var s = currentScene.LoadSceneAsync(LoadSceneMode.Additive);
         yield return new WaitUntil(() => s.IsDone);
-        
-        Camera.main.clearFlags = CameraClearFlags.Skybox;
-        Camera.main.backgroundColor = Color.white;
-        SceneManager.SetActiveScene(s.Result.Scene);
+
+        Scene loadedScene = s.Result.Scene;
+        SceneManager.SetActiveScene(loadedScene);
+
+        while (!fadeInisDone)
+        {
+            yield return null; // Wait until fade-in is complete
+        }
+        MainCamera.clearFlags = CameraClearFlags.Skybox;
+        MainCamera.backgroundColor = Color.white;
         Boat.SetActive(true);
-        
         OVRrig.parent = PlayerSittingPosition;
         SetBoatPositionBaseOnIndex(mapIndex, teleportIndex);
         passthroughLayer.textureOpacity = 0;
@@ -104,8 +135,8 @@ public class SceneLoadManager : MonoBehaviour
             SceneManager.UnloadSceneAsync(scene);
         }
 
-        Camera.main.clearFlags = CameraClearFlags.SolidColor;
-        Camera.main.backgroundColor = Color.clear;
+        MainCamera.clearFlags = CameraClearFlags.SolidColor;
+        MainCamera.backgroundColor = Color.clear;
 
         Boat.transform.position = Vector3.zero;
         Boat.transform.rotation = Quaternion.identity;
@@ -127,7 +158,7 @@ public class SceneLoadManager : MonoBehaviour
             Debug.LogWarning("Map index out of range.");
         }
     }
-    
+
     public void SetTeleportIndex(object obj)
     {
         int index = (int)obj;
@@ -140,5 +171,54 @@ public class SceneLoadManager : MonoBehaviour
             Debug.LogWarning("Teleport index out of range.");
         }
     }
+
+    #region Fade Mask
+
+    public void FadeInMask()
+    {
+        WhiteFadeMask.SetActive(true);
+        WhiteFadeMask.GetComponent<MeshRenderer>().material.DOColor(Color.white, 1f).OnComplete(() =>
+        {
+            fadeInisDone = true;
+            FadeInMaskCompleteEvent.RaiseEvent(null,this);
+        });
+        originalFarClipPlane = MainCamera.farClipPlane;
+
+        DOTween.To(
+            () => MainCamera.farClipPlane,
+            x => MainCamera.farClipPlane = x,
+            1f,
+            1f
+        );
+    }
+
+    public async Task FadeOutMask()
+    {
+        while (!fadeInisDone)
+        {
+            await Task.Delay(100);
+        }
+        DepthMask.SetActive(true);
+        var material = DepthMask.GetComponent<MeshRenderer>().material;
+        material.SetFloat(_AphaForDepthMask, 1f);
+
+        WhiteFadeMask.GetComponent<MeshRenderer>().material.color = Color.clear;
+        DOTween.To(
+            () => MainCamera.farClipPlane,
+            x => MainCamera.farClipPlane = x,
+            originalFarClipPlane,
+            2f
+        ).OnComplete(() =>
+        {
+            material.DOFloat(0f, _AphaForDepthMask, 0.5f).OnComplete(() =>
+            {
+                DepthMask.SetActive(false);
+                fadeInisDone = false;
+            });
+            
+        });
+    }
+    
+    #endregion
 
 }
