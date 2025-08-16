@@ -1,4 +1,3 @@
-
 public enum Element
 {
     Fire,
@@ -6,4 +5,12 @@ public enum Element
     Earth,
     Wood,
     Metal,
+}
+
+public enum SceneType
+{
+    Gameplay,
+    LandScape,
+    Decoration,
+    VFX
 }

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Surface
+  m_EditorClassIdentifier: 
+  m_GroupName: Surface
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 98a45b40dc22d2c40a45b19e4e2936e4
+  m_SerializeEntries:
+  - m_GUID: 9c2df26617c5da543920a9132e0407d5
+    m_Address: Surface_VFX
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a53452bedd6c1624c8a6d4feecf01aff
+    m_Address: Surface_Decoration
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b7c8f8b72a23e954fbe01986574856c4
+    m_Address: Surface_LandScape
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: bc708e07cdd459b4480c7c5e3c08d733, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 1a4cbd029391a1740829d48a3d01dd14, type: 2}
+    - {fileID: 11400000, guid: 6a08020053541b741a381ea680a1f666, type: 2}

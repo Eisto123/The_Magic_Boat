@@ -88,8 +88,22 @@ public class SceneLoadManager : MonoBehaviour
 
     private void UnloadScene()
     {
-        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
-        currentScene.ReleaseAsset();
+        List<Scene> scenesToUnload = new List<Scene>();
+        int sceneCount = SceneManager.sceneCount;
+        for (int i = 0; i < sceneCount; i++)
+        {
+            Scene scene = SceneManager.GetSceneAt(i);
+            if (scene.name != "Persistant")
+            {
+                scenesToUnload.Add(scene);
+            }
+        }
+
+        foreach (var scene in scenesToUnload)
+        {
+            SceneManager.UnloadSceneAsync(scene);
+        }
+
         Camera.main.clearFlags = CameraClearFlags.SolidColor;
         Camera.main.backgroundColor = Color.clear;
 
