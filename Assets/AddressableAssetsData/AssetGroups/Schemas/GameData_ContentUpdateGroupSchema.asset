@@ -9,16 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cdf437337865f94f8cf377705098701, type: 3}
-  m_Name: TopSeaTeleportPos
+  m_Script: {fileID: 11500000, guid: 5834b5087d578d24c926ce20cd31e6d6, type: 3}
+  m_Name: GameData_ContentUpdateGroupSchema
   m_EditorClassIdentifier: 
-  teleportPositions:
-  - positionName: Start
-    targetPos:
-      x: -76
-      y: 1.2
-      z: -9
-    targetRotation:
-      x: 0
-      y: 60
-      z: 0
+  m_Group: {fileID: 11400000, guid: 21160f3a3dd03994e9bd0e1912ea61ee, type: 2}
+  m_StaticContent: 0

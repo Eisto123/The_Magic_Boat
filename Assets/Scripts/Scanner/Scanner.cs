@@ -18,14 +18,16 @@ public class Scanner : MonoBehaviour
     public Transform pointBTransform;
     public Camera vrCamera;
     public GameObject CameraRig;
+    public GameObject indicatorPrefab;
     public TransformRecognizerActiveState leftWrist;
     private bool isScanning = false;
     private HashSet<Collectable> previouslyDetected = new HashSet<Collectable>();
     private List<(Vector3 center, Vector3 halfExtents, Quaternion rotation)> debugBoxes = new List<(Vector3, Vector3, Quaternion)>();
+    private GameObject indicatorInstance;
     public void Scan()
     {
         isScanning = true;
-
+        Instantiate(indicatorPrefab, pointATransform.position, Quaternion.identity, pointATransform);
         // Implement the scanning logic here
         Debug.Log("Scanning...");
     }
@@ -47,6 +49,11 @@ public class Scanner : MonoBehaviour
             if (!collectable.isCollected) collectable.StopCollect();
         }
         previouslyDetected.Clear();
+        if (indicatorInstance != null)
+        {
+            Destroy(indicatorInstance);
+            indicatorInstance = null;
+        }
         Debug.Log("Stopping scan...");
     }
 
@@ -91,6 +98,8 @@ public class Scanner : MonoBehaviour
             hits.AddRange(boxHits);
         }
 
+        UpdateIndicatorPosition(center, Quaternion.LookRotation(vrCamera.transform.forward, up));
+        
         HashSet<Collectable> currentlyDetected = new HashSet<Collectable>();
 
         foreach (Collider col in hits)
@@ -116,6 +125,7 @@ public class Scanner : MonoBehaviour
                 old.StopCollect();
             }
         }
+        
 
         previouslyDetected = currentlyDetected;
     }
@@ -144,6 +154,19 @@ public class Scanner : MonoBehaviour
             rigMoveTween.Kill();
         rigMoveTween = CameraRig.transform.DOMove(originalRigPosition, 2.0f)
             .SetEase(Ease.OutCirc);
+    }
+
+    private void UpdateIndicatorPosition(Vector3 targetPosition, Quaternion targetRotation)
+    {
+        if (indicatorInstance != null)
+        {
+            indicatorInstance.transform.position = targetPosition;
+            indicatorInstance.transform.rotation = targetRotation;
+        }
+        else
+        {
+            indicatorInstance = Instantiate(indicatorPrefab, targetPosition, targetRotation);
+        }
     }
     
     void OnDrawGizmos()

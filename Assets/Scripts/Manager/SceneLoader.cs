@@ -10,26 +10,11 @@ using UnityEngine.ResourceManagement.ResourceProviders;
 public class SceneLoader : MonoBehaviour
 {
     public SceneGroup sceneGroup;
-    public ObjectEventSO FadeInMaskCompleteEvent;
-    private bool fadeInisDone = false;
     public List<AsyncOperationHandle<SceneInstance>> pendingHandles = new List<AsyncOperationHandle<SceneInstance>>();
 
     async void Start()
     {
         await LoadAllScenesHoldActivation();
-    }
-    void OnEnable()
-    {
-        FadeInMaskCompleteEvent.onEventRaised += SetFadeInComplete;
-    }
-    void OnDisable()
-    {
-        FadeInMaskCompleteEvent.onEventRaised -= SetFadeInComplete;
-    }
-
-    private void SetFadeInComplete(object signal)
-    {
-        fadeInisDone = true;
     }
 
     public async Task LoadAllScenesHoldActivation()
@@ -45,13 +30,16 @@ public class SceneLoader : MonoBehaviour
             var handle = await sceneGroupManager.LoadScene(sceneData, progress, false);
             pendingHandles.Add(handle);
         }
+        Debug.Log($"Loaded {pendingHandles.Count} scenes, waiting for fade-in to complete...");
 
-        while (!fadeInisDone)
+        while (!SceneLoadManager.FadeInIsDone)
         {
             await Task.Delay(100); // Wait until fade-in is complete
         }
+        Debug.Log("Fade-in complete, activating all loaded scenes...");
 
         ActivateAllLoadedScenes();
+        Debug.Log("All scenes activated.");
         await SceneLoadManager.instance.FadeOutMask();
     }
     public async Task LoadScene()

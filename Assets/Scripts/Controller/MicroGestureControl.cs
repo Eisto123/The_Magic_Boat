@@ -7,7 +7,7 @@ public class MicroGestureControl : MonoBehaviour
 {
     public OVRHand rightHand;
     public Rigidbody boatRigidbody;
-    private bool isMoving = false;
+    public bool isMoving = false;
     public float moveSpeed = 10f;
     public float turnAngle = 30f;
     public float turnTorque = 100f;

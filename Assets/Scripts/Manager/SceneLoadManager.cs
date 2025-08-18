@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using DG.Tweening;
+using Meta.WitAi.Lib;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
@@ -11,6 +12,7 @@ using UnityEngine.SceneManagement;
 public class SceneLoadManager : MonoBehaviour
 {
     public static SceneLoadManager instance;
+    public static bool FadeInIsDone = false;
     public OVRPassthroughLayer passthroughLayer;
     private AssetReference currentScene;
     public List<AssetReference> Maps;
@@ -25,11 +27,7 @@ public class SceneLoadManager : MonoBehaviour
     public GameObject DepthMask;
     public Camera MainCamera;
     private float originalFarClipPlane;
-    private bool fadeInisDone = false;
     private int _AphaForDepthMask = Shader.PropertyToID("_Alpha");
-    public ObjectEventSO FadeInMaskCompleteEvent;
-
-
     public static int mapIndex = 0;
     public int teleportIndex = 0;
     private SceneLoader currentSceneLoader;
@@ -85,7 +83,7 @@ public class SceneLoadManager : MonoBehaviour
         Scene loadedScene = s.Result.Scene;
         SceneManager.SetActiveScene(loadedScene);
 
-        while (!fadeInisDone)
+        while (!FadeInIsDone)
         {
             yield return null; // Wait until fade-in is complete
         }
@@ -140,6 +138,7 @@ public class SceneLoadManager : MonoBehaviour
 
         Boat.transform.position = Vector3.zero;
         Boat.transform.rotation = Quaternion.identity;
+        Boat.GetComponent<MicroGestureControl>().isMoving = false;
         Boat.SetActive(false);
         OVRrig.parent = null;
         passthroughLayer.textureOpacity = 1;
@@ -179,8 +178,7 @@ public class SceneLoadManager : MonoBehaviour
         WhiteFadeMask.SetActive(true);
         WhiteFadeMask.GetComponent<MeshRenderer>().material.DOColor(Color.white, 1f).OnComplete(() =>
         {
-            fadeInisDone = true;
-            FadeInMaskCompleteEvent.RaiseEvent(null,this);
+            FadeInIsDone = true;
         });
         originalFarClipPlane = MainCamera.farClipPlane;
 
@@ -194,7 +192,7 @@ public class SceneLoadManager : MonoBehaviour
 
     public async Task FadeOutMask()
     {
-        while (!fadeInisDone)
+        while (!FadeInIsDone)
         {
             await Task.Delay(100);
         }
@@ -213,7 +211,7 @@ public class SceneLoadManager : MonoBehaviour
             material.DOFloat(0f, _AphaForDepthMask, 0.5f).OnComplete(() =>
             {
                 DepthMask.SetActive(false);
-                fadeInisDone = false;
+                FadeInIsDone = false;
             });
             
         });
