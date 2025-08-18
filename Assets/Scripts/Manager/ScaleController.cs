@@ -15,16 +15,27 @@ public class ScaleController : MonoBehaviour
     private float waterVolume;
     public Transform basePoint;
     public ObjectEventSO ModelResetCompleteEvent;
+    private float waterHeight = 1f;
+    private Material waterMaterial;
 
     void Awake()
     {
         currentScale = transform.localScale;
-        waterVolume = currentScale.x * currentScale.z * waterLevel.transform.localScale.y;
+        waterVolume = currentScale.x * currentScale.z * waterHeight;
+        waterMaterial = waterLevel.GetComponent<Renderer>().material;
     }
     void Update()
     {
-        waterLevel.transform.localScale = new Vector3(waterLevel.transform.localScale.x, waterVolume / (transform.localScale.x * transform.localScale.z), waterLevel.transform.localScale.z);
-        waterLevel.transform.localPosition = new Vector3(0, -(1 - waterLevel.transform.localScale.y) / 2, 0);
+        float minArea = scaleLevel[0] * scaleLevel[0];
+        float maxArea = scaleLevel[scaleLevel.Length - 1] * scaleLevel[scaleLevel.Length - 1];
+        float currentArea = transform.localScale.x * transform.localScale.z;
+
+        float fillAmount = Mathf.InverseLerp(maxArea, minArea, currentArea);
+
+        if (waterMaterial != null)
+        {
+            waterMaterial.SetFloat("_FillAmount", fillAmount);
+        }
     }
 
     public void OnTransformEnd()
