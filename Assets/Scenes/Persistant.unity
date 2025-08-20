@@ -27502,8 +27502,6 @@ MonoBehaviour:
   WhiteFadeMask: {fileID: 19420471}
   DepthMask: {fileID: 1253380746}
   MainCamera: {fileID: 468913468}
-  FadeInMaskCompleteEvent: {fileID: 11400000, guid: 0cafed7bc12369140a49cb42d35a074f,
-    type: 2}
   teleportIndex: 0
 --- !u!114 &2069975964
 MonoBehaviour:
@@ -29366,7 +29364,7 @@ MonoBehaviour:
   turnAngle: 30
   turnTorque: 33
   turnDuration: 1
-  maxSpeed: 35
+  maxSpeed: 50
   breakForce: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
