@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfd4a44ff23bef34882dcda9919335a6, type: 3}
+  m_Name: TutorialSequenceData
+  m_EditorClassIdentifier: 
+  progressInfos:
+  - ProgressName: Welcome
+    ProgressDescription: Welcome to The Magic Boat. This experience does not require
+      a controller. Please make sure you put down your controller and see the hand
+      outline with Hand Tracking.
+    IsCompleted: 0
+    RequireUIPanel: 1
+    RequireAudio: 1
+  - ProgressName: Ecosystem Tank
+    ProgressDescription: This is an ecosystem tank. You can grab it and change its
+      size.
+    IsCompleted: 0
+    RequireUIPanel: 1
+    RequireAudio: 1
+  - ProgressName: The Boat
+    ProgressDescription: You can find the boat in the right side of the Tank. You
+      can grab it using your hand.
+    IsCompleted: 0
+    RequireUIPanel: 0
+    RequireAudio: 0
+  - ProgressName: Teleport point
+    ProgressDescription: After picking up the boat. You can find teleport point in
+      the tank. Drop the boat to the teleport point by release your hand near by
+      the teleport point.
+    IsCompleted: 0
+    RequireUIPanel: 0
+    RequireAudio: 0
+  - ProgressName: Teleport Stone
+    ProgressDescription: Hover the teleport stone to start teleportation.
+    IsCompleted: 0
+    RequireUIPanel: 0
+    RequireAudio: 0

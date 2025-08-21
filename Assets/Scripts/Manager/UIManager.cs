@@ -15,6 +15,7 @@ public class UIManger : MonoBehaviour
     [Header("UI Elements")]
     public GameObject scanUI;
     public GameObject summonUI;
+    public InfoPanel tutorialPanel;
 
     private Transform cameraTransform;
 
@@ -54,6 +55,25 @@ public class UIManger : MonoBehaviour
         {
             summonUI.SetActive(true);
             summonUI.transform.LookAt(cameraTransform);
+        }
+    }
+
+    public void UpdateTutorialPanel(object progress)
+    {
+        ProgressInfo progressInfo = (ProgressInfo)progress;
+        
+        if (progressInfo != null)
+        {
+            if (!progressInfo.RequireUIPanel)
+            {
+                return;
+            }
+            tutorialPanel.gameObject.SetActive(true);
+            tutorialPanel.SetupUI(progressInfo.ProgressName, progressInfo.ProgressDescription);
+        }
+        else
+        {
+            Debug.LogWarning("ProgressInfo is null in UpdateTutorialPanel.");
         }
     }
 
