@@ -13,6 +13,7 @@ public class ProgressInfo
 {
     public string ProgressName;
     public string ProgressDescription;
+    public int ProgressIndex;
     public bool IsCompleted;
     public bool RequireUIPanel;
     public bool RequireAudio;

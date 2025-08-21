@@ -60,12 +60,13 @@ public class UIManger : MonoBehaviour
 
     public void UpdateTutorialPanel(object progress)
     {
-        ProgressInfo progressInfo = (ProgressInfo)progress;
+        ProgressInfo progressInfo = progress as ProgressInfo;
         
         if (progressInfo != null)
         {
             if (!progressInfo.RequireUIPanel)
             {
+                tutorialPanel.gameObject.SetActive(false);
                 return;
             }
             tutorialPanel.gameObject.SetActive(true);
