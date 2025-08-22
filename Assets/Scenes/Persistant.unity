@@ -2962,7 +2962,7 @@ PrefabInstance:
     - target: {fileID: 2588925041195329601, guid: 6c55e6853bbc1a6488fad71f420edffa,
         type: 3}
       propertyPath: _transformFeatureConfigs._values.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2588925041195329601, guid: 6c55e6853bbc1a6488fad71f420edffa,
         type: 3}
@@ -2972,7 +2972,7 @@ PrefabInstance:
     - target: {fileID: 2588925041195329601, guid: 6c55e6853bbc1a6488fad71f420edffa,
         type: 3}
       propertyPath: _transformFeatureConfigs._values.Array.data[1]._state
-      value: 15
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 2588925041195329601, guid: 6c55e6853bbc1a6488fad71f420edffa,
         type: 3}
@@ -2982,7 +2982,7 @@ PrefabInstance:
     - target: {fileID: 2588925041195329601, guid: 6c55e6853bbc1a6488fad71f420edffa,
         type: 3}
       propertyPath: _transformFeatureConfigs._values.Array.data[1]._feature
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2588925041195329604, guid: 6c55e6853bbc1a6488fad71f420edffa,
         type: 3}
@@ -3156,7 +3156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b942c16a6d6a4edaad7c18c7d5762cdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hand: {fileID: 1469137653}
+  _hand: {fileID: 244945752}
   _fingerStateThresholds:
   - Finger: 0
     StateThresholds: {fileID: 11400000, guid: 669531ac9e967a2449a0e600dde8a9c4, type: 2}
@@ -3181,7 +3181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bffe606b408599b4fad696ddc889a943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hand: {fileID: 1469137653}
+  _hand: {fileID: 244945752}
   _hmd: {fileID: 325736827}
   _trackingToWorldTransformer: {fileID: 737061332}
   _disableProactiveEvaluation: 0
@@ -8472,8 +8472,8 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 512
-  maxDetectionLength: 20
-  maxRopeLength: 10
+  maxDetectionLength: 50
+  maxRopeLength: 40
   reelPrefab: {fileID: 3195628612840058293, guid: 86484e410d66e834aaf9758eed2c392f,
     type: 3}
 --- !u!1 &567562977
@@ -30943,7 +30943,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7921906530116787495}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04f1130b3e182764c962ad9bf7ba93c0, type: 3}
   m_Name: 

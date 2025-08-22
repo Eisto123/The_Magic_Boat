@@ -16,39 +16,41 @@ public class RopeShoot : MonoBehaviour
     private float maxSelectAngle = 30f; // in degrees
     public GameObject reelPrefab;
     private Reel reelInstance;
-
-    void Start()
-    {
-
-    }
+    private float scanInterval = 0.2f;
+    private float scanTimer = 0f;
+    private Collider[] anchorBuffer = new Collider[32];
 
     void FixedUpdate()
     {
-        ScanAndSelectAnchor();
+        scanTimer += Time.fixedDeltaTime;
+        if (scanTimer >= scanInterval)
+        {
+            ScanAndSelectAnchor();
+            scanTimer = 0f;
+        }
     }
+
 
     public void ScanAndSelectAnchor()
     {
-        Collider[] anchors = Physics.OverlapSphere(vrCamera.transform.position, maxDetectionLength, targetLayer);
+        int count = Physics.OverlapSphereNonAlloc(vrCamera.transform.position, maxDetectionLength, anchorBuffer, targetLayer);
         GameObject bestAnchor = null;
-        float bestDot = -1f; // -1 is worst, 1 is best
+        float bestDot = -1f;
 
-        foreach (var anchor in anchors)
+        for (int i = 0; i < count; i++)
         {
+            var anchor = anchorBuffer[i];
             anchor.TryGetComponent<Anchor>(out Anchor anchorComponent);
             if (anchorComponent != null)
-            {
                 anchorComponent.SetAnchorState(AnchorState.Unselected);
-            }
+
             float distance = Vector3.Distance(vrCamera.transform.position, anchor.transform.position);
             if (distance > maxRopeLength) continue;
 
             Vector3 toAnchor = (anchor.transform.position - vrCamera.transform.position).normalized;
-            float dot = Vector3.Dot(vrCamera.transform.forward, toAnchor); // 1 = directly in front
-
+            float dot = Vector3.Dot(vrCamera.transform.forward, toAnchor);
             float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
-
-            if (angle > maxSelectAngle) continue; // Only consider anchors within the angle
+            if (angle > maxSelectAngle) continue;
 
             if (dot > bestDot)
             {
@@ -59,12 +61,9 @@ public class RopeShoot : MonoBehaviour
 
         currentAnchor = bestAnchor;
         if (currentAnchor != null)
-        {
             currentAnchor.GetComponent<Anchor>().SetAnchorState(AnchorState.Selected);
-        }
-        else
-            Debug.Log("No anchor in range and in front.");
     }
+
 
 
     private Coroutine shootTimerCoroutine;
@@ -77,7 +76,7 @@ public class RopeShoot : MonoBehaviour
             {
                 Vector3 toAnchor = (currentAnchor.transform.position - instanciatePoint.position).normalized;
                 Quaternion lookRotation = Quaternion.LookRotation(toAnchor, Vector3.up);
-                var GO = Instantiate(reelPrefab, instanciatePoint.position, lookRotation, instanciatePoint);
+                var GO = Instantiate(reelPrefab, instanciatePoint.position, lookRotation);
                 reelInstance = GO.GetComponent<Reel>();
     
             }
@@ -101,16 +100,6 @@ public class RopeShoot : MonoBehaviour
         {
             StopCoroutine(shootTimerCoroutine);
             shootTimerCoroutine = null;
-        }
-        if (currentAnchor != null)
-        {
-            currentAnchor.GetComponent<Anchor>().SetAnchorState(AnchorState.Unselected);
-            currentAnchor = null;
-        }
-        if (reelInstance != null)
-        {
-            Destroy(reelInstance.gameObject);
-            reelInstance = null;
         }
     }
     private IEnumerator ShootTimerRoutine()
