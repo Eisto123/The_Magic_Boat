@@ -22,6 +22,7 @@ TagManager:
   - QDSUITextSecondaryInvertedColor
   - QDSUITextInputField
   - QDSUIToggleCheckboxRadio
+  - Boat
   layers:
   - Default
   - TransparentFX
