@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Oculus.Interaction.HandGrab;
 
 public class Reel : MonoBehaviour
 {
@@ -19,13 +20,14 @@ public class Reel : MonoBehaviour
     [SerializeField] private float wobbleMagnitude = 0.04f;
     [SerializeField] private float wobbleFrequency = 20f;
     [SerializeField] private float completeDistance = 1.0f;
-    [SerializeField] private float rotateSpeed = 2f;
+    [SerializeField] float turnSpeed = 0.5f;
+    [SerializeField] private HandGrabInteractable handGrabInteractable;
     public bool moveComplete = false;
     public ObjectEventSO moveCompleteEvent;
-
+    [SerializeField] private float maxReelDistance = 2f;
     private Coroutine wobbleCoroutine;
     private Rigidbody boatRB;
-
+    private Coroutine destroyCoroutine;
     void OnEnable()
     {
         lastWheelAngleX = wheel.localEulerAngles.x;
@@ -37,6 +39,25 @@ public class Reel : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (boat != null && Vector3.Distance(transform.position, boat.position) > maxReelDistance)
+        {
+            Destroy(gameObject);
+        }
+        if (handGrabInteractable.State != Oculus.Interaction.InteractableState.Select)
+        {
+            if (destroyCoroutine == null)
+                destroyCoroutine = StartCoroutine(DestroyAfterDelay());
+            return;
+        }
+        else
+        {
+            // Cancel destroy timer if grabbed again
+            if (destroyCoroutine != null)
+            {
+                StopCoroutine(destroyCoroutine);
+                destroyCoroutine = null;
+            }
+        }
         if (!ropeDeployed) return;
 
         float currentAngleX = wheel.localEulerAngles.x;
@@ -47,22 +68,22 @@ public class Reel : MonoBehaviour
         {
             if (boatRB != null)
             {
-                Vector3 direction = (anchor.position - boat.position).normalized;
-                float force = Mathf.Abs(deltaAngle) * pullForce;
-                boatRB.AddForce(direction * force, ForceMode.Force);
-                if (direction.sqrMagnitude > 0.001f)
+                if (boatRB != null)
                 {
-                    Quaternion ReelRotation = Quaternion.LookRotation(direction, Vector3.up);
-                    float dynamicRotateSpeed = Mathf.Abs(deltaAngle) * rotateSpeed;
-                    this.transform.rotation = Quaternion.Slerp(transform.rotation, ReelRotation, dynamicRotateSpeed * Time.fixedDeltaTime);
-                    Vector3 flatDirection = new Vector3(direction.x, 0, direction.z).normalized;
-                    if (flatDirection.sqrMagnitude > 0.001f)
+                    Vector3 toAnchor = anchor.position - boat.position;
+                    Vector3 flatToAnchor = new Vector3(toAnchor.x, 0, toAnchor.z);
+                    Vector3 boatForward = new Vector3(boat.forward.x, 0, boat.forward.z).normalized;
+
+                    // Pull force only in the boat's forward direction, scaled by how well it's facing the anchor
+                    float forwardDot = Vector3.Dot(boatForward, flatToAnchor.normalized);
+                    float forceMagnitude = Mathf.Abs(deltaAngle) * pullForce * Mathf.Max(0, forwardDot);
+                    boatRB.AddForce(boatForward * forceMagnitude, ForceMode.Force);
+                    
+                    if (flatToAnchor.sqrMagnitude > 0.001f && boatForward.sqrMagnitude > 0.001f)
                     {
-                        Quaternion targetRotation = Quaternion.LookRotation(flatDirection, Vector3.up);
-                        boat.rotation = Quaternion.Slerp(boat.rotation, targetRotation, dynamicRotateSpeed * Time.fixedDeltaTime);
-                        
+                        Quaternion targetRotation = Quaternion.LookRotation(flatToAnchor.normalized, Vector3.up);
+                        boat.rotation = Quaternion.Slerp(boat.rotation, targetRotation, turnSpeed * Time.fixedDeltaTime);
                     }
-    
                 }
             }
         }
@@ -84,6 +105,12 @@ public class Reel : MonoBehaviour
         }
     
     }
+    private IEnumerator DestroyAfterDelay()
+    {
+        yield return new WaitForSeconds(3f);
+        Destroy(gameObject);
+    }
+
     private IEnumerator OnMoveComplete()
     {
         while (boatRB.velocity.magnitude > 0.1f)
@@ -92,7 +119,7 @@ public class Reel : MonoBehaviour
             yield return null;
         }
         boatRB.velocity = Vector3.zero;
-        moveCompleteEvent.RaiseEvent(null,this);
+        moveCompleteEvent.RaiseEvent(null, this);
     }
 
     private void UpdateRopeWhileDeployed()
@@ -139,7 +166,7 @@ public class Reel : MonoBehaviour
             .OnComplete(() =>
             {
                 if (wobbleCoroutine != null) StopCoroutine(wobbleCoroutine);
-                StartCoroutine(SettleRopeToStraight(start, end, 2f));
+                ropeDeployed = true;
             });
         }
     }
@@ -204,7 +231,7 @@ public class Reel : MonoBehaviour
             float segmentT = (float)i / (ropeSegments - 1);
             lineRenderer.SetPosition(i, Vector3.Lerp(start, end, segmentT));
         }
-        ropeDeployed = true;
+        
     }
 
 

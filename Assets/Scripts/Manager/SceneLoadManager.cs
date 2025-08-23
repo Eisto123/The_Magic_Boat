@@ -19,8 +19,7 @@ public class SceneLoadManager : MonoBehaviour
     public AssetReference ARMode;
     public List<LevelTeleportPosSO> LevelTeleportPositions;
     public GameObject Boat;
-    public Transform PlayerSittingPosition;
-    public Transform OVRrig;
+    public CameraRigManager OVRrig;
 
     [Header("FadeMask")]
     public GameObject WhiteFadeMask;
@@ -90,7 +89,9 @@ public class SceneLoadManager : MonoBehaviour
         MainCamera.clearFlags = CameraClearFlags.Skybox;
         MainCamera.backgroundColor = Color.white;
         Boat.SetActive(true);
-        OVRrig.parent = PlayerSittingPosition;
+        OVRrig.gameObject.transform.SetParent(Boat.transform);
+        OVRrig.transform.localRotation = Quaternion.identity;
+        //OVRrig.SetFollowBoat(true);
         SetBoatPositionBaseOnIndex(mapIndex, teleportIndex);
         passthroughLayer.textureOpacity = 0;
     }
@@ -137,10 +138,13 @@ public class SceneLoadManager : MonoBehaviour
         MainCamera.backgroundColor = Color.clear;
 
         Boat.transform.position = Vector3.zero;
-        Boat.transform.rotation = Quaternion.identity;
+        Boat.transform.eulerAngles = Vector3.zero;
+        Boat.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        Boat.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         Boat.GetComponent<MicroGestureControl>().isMoving = false;
         Boat.SetActive(false);
-        OVRrig.parent = null;
+        OVRrig.gameObject.transform.SetParent(null);
+        //OVRrig.SetFollowBoat(false);
         passthroughLayer.textureOpacity = 1;
     }
 

@@ -24399,6 +24399,7 @@ GameObject:
   - component: {fileID: 1733001377}
   - component: {fileID: 1733001376}
   - component: {fileID: 1733001375}
+  - component: {fileID: 1733001380}
   m_Layer: 0
   m_Name: '[BuildingBlock] Camera Rig'
   m_TagString: Untagged
@@ -24554,6 +24555,20 @@ Transform:
   - {fileID: 737061331}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1733001380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733001374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc37bcb1d172ea942bfda8d4c42b9ebd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followBoat: 0
+  sittingPoint: {fileID: 772879591}
 --- !u!1 &1735255209
 GameObject:
   m_ObjectHideFlags: 0
@@ -28122,8 +28137,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2484fa5c37e5e48408510561119269e3, type: 2}
   - {fileID: 11400000, guid: 939ac88fc1905264c8bfe51e369af914, type: 2}
   Boat: {fileID: 7921906530116787495}
-  PlayerSittingPosition: {fileID: 772879591}
-  OVRrig: {fileID: 1733001379}
+  OVRrig: {fileID: 1733001380}
   WhiteFadeMask: {fileID: 19420471}
   DepthMask: {fileID: 1253380746}
   MainCamera: {fileID: 468913468}
