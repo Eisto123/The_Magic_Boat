@@ -78,11 +78,12 @@ public class Reel : MonoBehaviour
                     float forwardDot = Vector3.Dot(boatForward, flatToAnchor.normalized);
                     float forceMagnitude = Mathf.Abs(deltaAngle) * pullForce * Mathf.Max(0, forwardDot);
                     boatRB.AddForce(boatForward * forceMagnitude, ForceMode.Force);
-                    
+
                     if (flatToAnchor.sqrMagnitude > 0.001f && boatForward.sqrMagnitude > 0.001f)
                     {
                         Quaternion targetRotation = Quaternion.LookRotation(flatToAnchor.normalized, Vector3.up);
-                        boat.rotation = Quaternion.Slerp(boat.rotation, targetRotation, turnSpeed * Time.fixedDeltaTime);
+                        Quaternion newRotation = Quaternion.Slerp(boatRB.rotation, targetRotation, turnSpeed * Time.fixedDeltaTime);
+                        boatRB.MoveRotation(newRotation);
                     }
                 }
             }
