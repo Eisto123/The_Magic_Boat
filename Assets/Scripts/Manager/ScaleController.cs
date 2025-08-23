@@ -9,34 +9,41 @@ public class ScaleController : MonoBehaviour
     public GameObject grabControl;
     public Vector3 currentScale;
     public float[] scaleLevel = new float[] { 0.1f, 0.115f, 0.158f, 0.2f };
+    public float[] waterLevelScale = new float[] { 1f,0.67f, 0.33f,0.12f};
     public ObjectEventSO transformEndEvent;
     private int currentLevel;
     public GameObject waterLevel;
-    private float waterVolume;
     public Transform basePoint;
     public ObjectEventSO ModelResetCompleteEvent;
-    private float waterHeight = 1f;
-    private Material waterMaterial;
 
     void Awake()
     {
         currentScale = transform.localScale;
-        waterVolume = currentScale.x * currentScale.z * waterHeight;
-        waterMaterial = waterLevel.GetComponent<Renderer>().material;
     }
     void Update()
     {
-        float minArea = scaleLevel[0] * scaleLevel[0];
-        float maxArea = scaleLevel[scaleLevel.Length - 1] * scaleLevel[scaleLevel.Length - 1];
-        float currentArea = transform.localScale.x * transform.localScale.z;
-
-        float fillAmount = Mathf.InverseLerp(maxArea, minArea, currentArea);
-
-        if (waterMaterial != null)
-        {
-            waterMaterial.SetFloat("_FillAmount", fillAmount);
-        }
+        float xScale = transform.localScale.x;
+        float targetWaterY = GetInterpolatedWaterLevel(xScale);
+        Vector3 waterScale = waterLevel.transform.localScale;
+        waterScale.y = targetWaterY;
+        waterLevel.transform.localScale = waterScale;
     }
+    private float GetInterpolatedWaterLevel(float xScale)
+    {
+        // Find which two scaleLevels xScale is between
+        for (int i = 0; i < scaleLevel.Length - 1; i++)
+        {
+            if (xScale >= scaleLevel[i] && xScale <= scaleLevel[i + 1])
+            {
+                float t = Mathf.InverseLerp(scaleLevel[i], scaleLevel[i + 1], xScale);
+                return Mathf.Lerp(waterLevelScale[i], waterLevelScale[i + 1], t);
+            }
+        }
+        // If out of bounds, clamp to nearest
+        if (xScale < scaleLevel[0]) return waterLevelScale[0];
+        return waterLevelScale[waterLevelScale.Length - 1];
+    }
+
 
     public void OnTransformEnd()
     {
