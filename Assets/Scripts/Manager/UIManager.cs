@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class UIManger : MonoBehaviour
 {
@@ -16,7 +17,8 @@ public class UIManger : MonoBehaviour
     public GameObject scanUI;
     public GameObject summonUI;
     public InfoPanel tutorialPanel;
-
+    public Transform panelCenterPos;
+    public Transform panelLeftPos;
     private Transform cameraTransform;
 
     private void Awake()
@@ -70,6 +72,20 @@ public class UIManger : MonoBehaviour
                 return;
             }
             tutorialPanel.gameObject.SetActive(true);
+            if (progressInfo.ProgressIndex == 0)
+            {
+                tutorialPanel.transform.position = panelCenterPos.position;
+                tutorialPanel.transform.rotation = panelCenterPos.rotation;
+            }
+            else
+            {
+                if (tutorialPanel.transform.position != panelLeftPos.position)
+                {
+                    tutorialPanel.transform.DOMove(panelLeftPos.position, 0.5f).SetEase(Ease.OutCubic);
+                    tutorialPanel.transform.DORotateQuaternion(panelLeftPos.rotation, 0.5f).SetEase(Ease.OutCubic);
+                }
+            
+            }
             tutorialPanel.SetupUI(progressInfo.ProgressName, progressInfo.ProgressDescription);
         }
         else

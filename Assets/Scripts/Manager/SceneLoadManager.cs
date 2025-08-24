@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using DG.Tweening;
-using Meta.WitAi.Lib;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
@@ -30,6 +28,8 @@ public class SceneLoadManager : MonoBehaviour
     public static int mapIndex = 0;
     public int teleportIndex = 0;
     private SceneLoader currentSceneLoader;
+    public bool skipTutorial = false;
+    public StringEventSO TutorialCompleteEvent;
     private void Awake()
     {
         if (instance == null)
@@ -43,12 +43,24 @@ public class SceneLoadManager : MonoBehaviour
     }
     void Start()
     {
+        StartCoroutine(StartHoldingTime());
+
+    }
+
+    private IEnumerator StartHoldingTime()
+    {
+        if (!skipTutorial)
+            yield return new WaitForSeconds(15f);
+
+        else
+            yield return null;
         LoadScene(ARMode);
         currentScene = ARMode;
+        TutorialCompleteEvent.RaiseEvent("Welcome",this);
     }
     public void ToggleScene()
     {
-        
+
         UnloadScene();
         if (currentScene == ARMode)
         {

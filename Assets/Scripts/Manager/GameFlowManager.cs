@@ -91,10 +91,6 @@ public class GameFlowManager : MonoBehaviour
                 Debug.Log("All tutorial progress completed.");
             }
         }
-        else
-        {
-            Debug.LogWarning($"Attempted to update progress for {completedTaskName}, but current progress is {currentProgress.ProgressName}.");
-        }
     }
 
 
