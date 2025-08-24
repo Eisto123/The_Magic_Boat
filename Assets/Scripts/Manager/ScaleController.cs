@@ -80,7 +80,7 @@ public class ScaleController : MonoBehaviour
         transform.DOMove(basePoint.position, 0.5f).SetEase(Ease.OutBack).OnComplete(() =>
         {
             ModelResetCompleteEvent.RaiseEvent(currentLevel, this);
-            grabControl.SetActive(false);
+            //grabControl.SetActive(false);
         });
         //transform.DORotate(basePoint.rotation.eulerAngles, 0.5f).SetEase(Ease.OutBack);
     }
