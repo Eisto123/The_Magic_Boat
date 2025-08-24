@@ -22,7 +22,7 @@ public class TeleportPointManager : MonoBehaviour
             for (int i = 1; i < teleportPoints.Count; i++)
             {
                 Transform tp = teleportPoints[i];
-                GameObject teleportPoint = Instantiate(teleportPointPrefab, tp.position, Quaternion.identity, tp);
+                GameObject teleportPoint = Instantiate(teleportPointPrefab, tp.position, Quaternion.identity);
                 teleportPoint.GetComponent<SnapPoint>().snapPointID = i - 1;
                 teleportPointsHolder.Add(teleportPoint);
             }

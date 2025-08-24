@@ -77,12 +77,12 @@ public class ScaleController : MonoBehaviour
 
     public void ResetPosition()
     {
-        transform.DOMove(basePoint.position, 0.5f).SetEase(Ease.OutBack);
-        transform.DORotate(basePoint.rotation.eulerAngles, 0.5f).SetEase(Ease.OutBack).OnComplete(() =>
+        transform.DOMove(basePoint.position, 0.5f).SetEase(Ease.OutBack).OnComplete(() =>
         {
             ModelResetCompleteEvent.RaiseEvent(currentLevel, this);
             grabControl.SetActive(false);
         });
+        //transform.DORotate(basePoint.rotation.eulerAngles, 0.5f).SetEase(Ease.OutBack);
     }
     public void EnableGrabbing()
     {
