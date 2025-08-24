@@ -472,6 +472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04f1130b3e182764c962ad9bf7ba93c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usingMicroGestureControl: 0
   rightHand: {fileID: 0}
   boatRigidbody: {fileID: 1043782657}
   isMoving: 0

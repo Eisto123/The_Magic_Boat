@@ -16431,6 +16431,8 @@ MonoBehaviour:
   scanUI: {fileID: 0}
   summonUI: {fileID: 891552805}
   tutorialPanel: {fileID: 2859147191923548480}
+  panelCenterPos: {fileID: 0}
+  panelLeftPos: {fileID: 0}
 --- !u!114 &1207963765
 MonoBehaviour:
   m_ObjectHideFlags: 0
