@@ -184,8 +184,6 @@ MonoBehaviour:
         m_EditorAssetChanged: 0
       sceneName: V
       sceneType: 3
-  FadeInMaskCompleteEvent: {fileID: 11400000, guid: 0cafed7bc12369140a49cb42d35a074f,
-    type: 2}
 --- !u!4 &1189261973
 Transform:
   m_ObjectHideFlags: 0

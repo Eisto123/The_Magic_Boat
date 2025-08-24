@@ -176,8 +176,6 @@ MonoBehaviour:
         m_EditorAssetChanged: 1
       sceneName: VFX
       sceneType: 3
-  FadeInMaskCompleteEvent: {fileID: 11400000, guid: 0cafed7bc12369140a49cb42d35a074f,
-    type: 2}
 --- !u!4 &460458308
 Transform:
   m_ObjectHideFlags: 0

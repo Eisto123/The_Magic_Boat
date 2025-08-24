@@ -2,18 +2,15 @@
 
 public class JellyfishMotion : MonoBehaviour
 {
-    [Header("Floating")]
     public float floatAmplitude = 0.2f;
     public float floatFrequency = 1f;
 
-    [Header("Wobble")]
-    public float wobbleAmplitude = 10f;   // degrees
+    public float wobbleAmplitude = 10f;
     public float wobbleFrequency = 2f;
 
-    [Header("Rotation")]
-    public float rotationSpeed = 10f;     // deg/sec, around Y
+    public float rotationSpeed = 10f;
 
-    [Header("Desync (per-instance randomization)")]
+
     public bool randomizeOnStart = true;
     public Vector2 floatAmpRange = new Vector2(0.15f, 0.30f);
     public Vector2 floatFreqRange = new Vector2(0.80f, 1.30f);
@@ -21,7 +18,7 @@ public class JellyfishMotion : MonoBehaviour
     public Vector2 wobbleFreqRange = new Vector2(1.2f, 2.5f);
     public Vector2 rotSpeedRange = new Vector2(5f, 20f);
 
-    // Per-instance phase offsets
+
     private float floatPhase;
     private float wobblePhase;
     private float rotPhase;
@@ -43,7 +40,7 @@ public class JellyfishMotion : MonoBehaviour
             rotationSpeed = Random.Range(rotSpeedRange.x, rotSpeedRange.y);
         }
 
-        // Random phase so每只水母起步时间不同
+
         floatPhase = Random.Range(0f, Mathf.PI * 2f);
         wobblePhase = Random.Range(0f, Mathf.PI * 2f);
         rotPhase = Random.Range(0f, Mathf.PI * 2f);
@@ -53,14 +50,14 @@ public class JellyfishMotion : MonoBehaviour
     {
         float t = Time.time;
 
-        // 上下浮动（加入相位）
+
         float newY = startPos.y + Mathf.Sin(t * floatFrequency + floatPhase) * floatAmplitude;
         transform.position = new Vector3(startPos.x, newY, startPos.z);
 
-        // 左右扭动（Z轴），加入相位
+
         float wobbleZ = Mathf.Sin(t * wobbleFrequency + wobblePhase) * wobbleAmplitude;
         Quaternion wobbleRotation = Quaternion.Euler(0f, 0f, wobbleZ);
 
-        
+
     }
 }

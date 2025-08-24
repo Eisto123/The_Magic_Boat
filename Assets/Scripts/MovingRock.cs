@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class MovingRock : MonoBehaviour
 {
-    [Header("Floating Settings")]
+
     public float amplitude = 0.2f; 
     public float frequency = 1f;  
 
-    [Header("Rotation Settings")]
+   
     public Vector3 rotationAxis = Vector3.up; 
     public float rotationSpeed = 10f;        
 
