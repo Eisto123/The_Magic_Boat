@@ -5,6 +5,7 @@ using DG.Tweening;
 
 public class MicroGestureControl : MonoBehaviour
 {
+    public bool usingMicroGestureControl = false;
     public OVRHand rightHand;
     public Rigidbody boatRigidbody;
     public bool isMoving = false;
@@ -27,6 +28,7 @@ public class MicroGestureControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!usingMicroGestureControl) return;
         OVRHand.MicrogestureType microgestureType = rightHand.GetMicrogestureType();
 
         switch (microgestureType)
@@ -48,6 +50,7 @@ public class MicroGestureControl : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (!usingMicroGestureControl) return;
         Move();
         if (isTurning)
         {
