@@ -81,8 +81,8 @@ public class UIManger : MonoBehaviour
             {
                 if (tutorialPanel.transform.position != panelLeftPos.position)
                 {
-                    tutorialPanel.transform.DOMove(panelLeftPos.position, 0.5f).SetEase(Ease.OutCubic);
-                    tutorialPanel.transform.DORotateQuaternion(panelLeftPos.rotation, 0.5f).SetEase(Ease.OutCubic);
+                    tutorialPanel.transform.DOMove(panelLeftPos.position, 1f).SetEase(Ease.OutBack);
+                    tutorialPanel.transform.DORotateQuaternion(panelLeftPos.rotation, 1f).SetEase(Ease.OutBack);
                 }
             
             }

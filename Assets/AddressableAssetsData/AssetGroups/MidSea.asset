@@ -10,15 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Scenes
+  m_Name: MidSea
   m_EditorClassIdentifier: 
-  m_GroupName: Scenes
+  m_GroupName: MidSea
   m_Data:
     m_SerializedData: []
   m_GUID: a3309a247a0b06846a5cba84e7171089
   m_SerializeEntries:
   - m_GUID: 44b0712be1b44f6429375aa09bdef247
     m_Address: AR
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c5d200cba3581644b1eaa246314995a
+    m_Address: Assets/Scenes/MidBreakDown/MidSea_VFX.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 669210678e6b63d4d87ab41fdeb16505
+    m_Address: Assets/Scenes/MidBreakDown/MidSea_Decoration.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 93f336e0756287c4a9a3359e81a6d2bb
+    m_Address: Assets/Scenes/MidBreakDown/MidSea_Landscape.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

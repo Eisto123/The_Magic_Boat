@@ -15,6 +15,13 @@ public class GameFlowManager : MonoBehaviour
     private ProgressInfo currentProgress;
     private int currentProgressIndex = 0;
 
+    [Header("Tutorial Step Completion Flags")]
+    public static bool rotationStepComplete = false;
+    public static bool scaleStepComplete = false;
+    private bool boatStepComplete = false;
+    private bool snapStepComplete = false;
+    private bool teleportStoneComplete = false;
+
 
     private void Awake()
     {
@@ -106,5 +113,32 @@ public class GameFlowManager : MonoBehaviour
         }
         Debug.Log("All collectables have been reset.");
     }
+
+    public void OnBoatPickedUp()
+    {
+        if (scaleStepComplete && !boatStepComplete)
+        {
+            boatStepComplete = true;
+            UpdateTutorialProgress("The Boat");
+        }
+    }
+    public void OnSnap()
+    {
+        if (boatStepComplete && !snapStepComplete)
+        {
+            snapStepComplete = true;
+            UpdateTutorialProgress("Teleport Point");
+        }
+    }
+
+    public void OnTeleport()
+    {
+        if (snapStepComplete&& !teleportStoneComplete)
+        {
+            teleportStoneComplete = true;
+            UpdateTutorialProgress("Teleport Stone");
+        }
+    }
+
 
 }

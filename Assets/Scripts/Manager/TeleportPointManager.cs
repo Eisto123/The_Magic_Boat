@@ -23,7 +23,9 @@ public class TeleportPointManager : MonoBehaviour
             {
                 Transform tp = teleportPoints[i];
                 GameObject teleportPoint = Instantiate(teleportPointPrefab, tp.position, Quaternion.identity);
-                teleportPoint.GetComponent<SnapPoint>().snapPointID = i - 1;
+                SnapPoint sp = teleportPoint.GetComponent<SnapPoint>();
+                sp.snapPointID = i - 1;
+                sp.Initializate(tp);
                 teleportPointsHolder.Add(teleportPoint);
             }
         }

@@ -16,6 +16,9 @@ public class SnapPoint : MonoBehaviour
     public TMP_Text WaterLevelText;
     public TMP_Text SnapPointText;
 
+    private Transform followTarget;
+    bool hasTargetSetup = false;
+
     void OnEnable()
     {
         InfoPanel.transform.DOScale(Vector3.one, 1f).From(Vector3.zero).SetEase(Ease.OutBack);
@@ -61,9 +64,16 @@ public class SnapPoint : MonoBehaviour
             if (lookDir.sqrMagnitude > 0.001f)
                 InfoPanel.transform.rotation = Quaternion.LookRotation(lookDir, Vector3.up);
         }
+
+    }
+    void LateUpdate()
+    {
+        if (followTarget != null && !hasTargetSetup)
+        {
+            transform.position = followTarget.position;
+        }
     }
 
-    
     public void OnOccupied()
     {
         isOccupied = true;
@@ -75,6 +85,12 @@ public class SnapPoint : MonoBehaviour
         isOccupied = false;
         OnTeleportPointVacated.RaiseEvent(snapPointID, null);
         InfoPanel.transform.DOScale(Vector3.one, 1f).From(Vector3.zero).SetEase(Ease.OutBack);
+    }
+
+    public void Initializate(Transform target)
+    {
+        followTarget = target;
+        hasTargetSetup = true;
     }
 
 }
