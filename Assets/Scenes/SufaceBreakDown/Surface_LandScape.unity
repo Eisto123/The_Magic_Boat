@@ -188,7 +188,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1272955126439743107, guid: 4be03d26df43bd14b803e467106a72a5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 188931431}
   m_SourcePrefab: {fileID: 100100000, guid: 4be03d26df43bd14b803e467106a72a5, type: 3}
 --- !u!4 &188931429 stripped
 Transform:
@@ -196,6 +200,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 188931428}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &188931430 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1272955126439743107, guid: 4be03d26df43bd14b803e467106a72a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 188931428}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &188931431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 188931430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df8e4d6874eeef47849ebb9048fa910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customMessage: "Maybe\u2026 if gathered again\u2026 the balance\u2026 could be
+    restored...."
+  textColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &524573599
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -262,7 +287,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1272955126439743107, guid: 4be03d26df43bd14b803e467106a72a5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 524573602}
   m_SourcePrefab: {fileID: 100100000, guid: 4be03d26df43bd14b803e467106a72a5, type: 3}
 --- !u!4 &524573600 stripped
 Transform:
@@ -270,6 +299,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 524573599}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &524573601 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1272955126439743107, guid: 4be03d26df43bd14b803e467106a72a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 524573599}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &524573602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524573601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df8e4d6874eeef47849ebb9048fa910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customMessage: "The runes\u2026 went dark\u2026 all at once\u2026 and never lit
+    again\u2026"
+  textColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &539330946
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -797,7 +847,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1272955126439743107, guid: 4be03d26df43bd14b803e467106a72a5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1000982864}
   m_SourcePrefab: {fileID: 100100000, guid: 4be03d26df43bd14b803e467106a72a5, type: 3}
 --- !u!4 &1000982862 stripped
 Transform:
@@ -805,6 +859,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1000982861}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1000982863 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1272955126439743107, guid: 4be03d26df43bd14b803e467106a72a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1000982861}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1000982864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000982863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df8e4d6874eeef47849ebb9048fa910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customMessage: "The power of the stone tablets\u2026 dispersed throughout the world\u2026
+    awaiting\u2026 reunion\u2026"
+  textColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &1051635729
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1605,7 +1680,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1272955126439743107, guid: 4be03d26df43bd14b803e467106a72a5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1641358945}
   m_SourcePrefab: {fileID: 100100000, guid: 4be03d26df43bd14b803e467106a72a5, type: 3}
 --- !u!4 &1641358943 stripped
 Transform:
@@ -1613,6 +1692,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1641358942}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1641358944 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1272955126439743107, guid: 4be03d26df43bd14b803e467106a72a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1641358942}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1641358945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641358944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df8e4d6874eeef47849ebb9048fa910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customMessage: "The power of the stone tablets\u2026 scattered across\u2026 waiting
+    to return\u2026"
+  textColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &1665913428
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2153,6 +2253,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: CollectObject (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8097412298332696380, guid: 4be03d26df43bd14b803e467106a72a5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8097412298332696380, guid: 4be03d26df43bd14b803e467106a72a5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8097412298332696380, guid: 4be03d26df43bd14b803e467106a72a5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8246619771465684482, guid: 4be03d26df43bd14b803e467106a72a5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2206,7 +2321,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1272955126439743107, guid: 4be03d26df43bd14b803e467106a72a5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2066102317}
   m_SourcePrefab: {fileID: 100100000, guid: 4be03d26df43bd14b803e467106a72a5, type: 3}
 --- !u!4 &2066102315 stripped
 Transform:
@@ -2214,6 +2333,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2066102314}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2066102316 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1272955126439743107, guid: 4be03d26df43bd14b803e467106a72a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 2066102314}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2066102317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2066102316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df8e4d6874eeef47849ebb9048fa910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customMessage: "The mist\u2026 after that moment\u2026 began spreading\u2026 from
+    the altar\u2026"
+  textColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!33 &20936942133284856
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -540,7 +540,6 @@ Transform:
   - {fileID: 1774021981}
   - {fileID: 2091897479}
   - {fileID: 1075562168}
-  - {fileID: 1106090255}
   - {fileID: 1992058729}
   - {fileID: 1965630503}
   - {fileID: 368218293}
@@ -771,7 +770,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1272955126439743107, guid: 4be03d26df43bd14b803e467106a72a5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 188368840}
   m_SourcePrefab: {fileID: 100100000, guid: 4be03d26df43bd14b803e467106a72a5, type: 3}
 --- !u!4 &188368838 stripped
 Transform:
@@ -779,6 +782,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 188368837}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &188368839 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1272955126439743107, guid: 4be03d26df43bd14b803e467106a72a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 188368837}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &188368840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 188368839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df8e4d6874eeef47849ebb9048fa910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customMessage: "Between the stone pillars\u2026 here\u2026 energy once flowed\u2026
+    through\u2026"
+  textColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &194553756
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,6 +935,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: CollectObject (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8097412298332696380, guid: 4be03d26df43bd14b803e467106a72a5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 8097412298332696380, guid: 4be03d26df43bd14b803e467106a72a5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -6.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 8097412298332696380, guid: 4be03d26df43bd14b803e467106a72a5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 15.55
+      objectReference: {fileID: 0}
     - target: {fileID: 8246619771465684482, guid: 4be03d26df43bd14b803e467106a72a5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -964,7 +1003,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1272955126439743107, guid: 4be03d26df43bd14b803e467106a72a5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 210071128}
   m_SourcePrefab: {fileID: 100100000, guid: 4be03d26df43bd14b803e467106a72a5, type: 3}
 --- !u!4 &210071126 stripped
 Transform:
@@ -972,6 +1015,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 210071125}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &210071127 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1272955126439743107, guid: 4be03d26df43bd14b803e467106a72a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 210071125}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &210071128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210071127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df8e4d6874eeef47849ebb9048fa910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customMessage: "Coral\u2026 the energy\u2026 the color\u2026 completely faded\u2026"
+  textColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &218749169
 GameObject:
   m_ObjectHideFlags: 0
@@ -4872,125 +4935,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1075562167}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1106090254
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1106090255}
-  - component: {fileID: 1106090259}
-  - component: {fileID: 1106090258}
-  - component: {fileID: 1106090257}
-  - component: {fileID: 1106090256}
-  m_Layer: 9
-  m_Name: Anchor (54)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1106090255
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1106090254}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 163.7, y: -2.12, z: -111.4}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 28611087}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1106090256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1106090254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: caec02fd0b04edd49a1b6cc8062e5a8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorState: 1
---- !u!135 &1106090257
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1106090254}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1106090258
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1106090254}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1106090259
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1106090254}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1125701196
 GameObject:
   m_ObjectHideFlags: 0
@@ -6113,7 +6057,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1272955126439743107, guid: 4be03d26df43bd14b803e467106a72a5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1323217264}
   m_SourcePrefab: {fileID: 100100000, guid: 4be03d26df43bd14b803e467106a72a5, type: 3}
 --- !u!4 &1323217262 stripped
 Transform:
@@ -6121,6 +6069,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1323217261}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1323217263 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1272955126439743107, guid: 4be03d26df43bd14b803e467106a72a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1323217261}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1323217264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323217263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df8e4d6874eeef47849ebb9048fa910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customMessage: "These roots\u2026 they were protecting\u2026 something\u2026"
+  textColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1376829723
 GameObject:
   m_ObjectHideFlags: 0
@@ -7615,7 +7583,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1272955126439743107, guid: 4be03d26df43bd14b803e467106a72a5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1557500698}
   m_SourcePrefab: {fileID: 100100000, guid: 4be03d26df43bd14b803e467106a72a5, type: 3}
 --- !u!4 &1557500696 stripped
 Transform:
@@ -7623,6 +7595,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1557500695}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1557500697 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1272955126439743107, guid: 4be03d26df43bd14b803e467106a72a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1557500695}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1557500698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557500697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df8e4d6874eeef47849ebb9048fa910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customMessage: "Once the water\u2026 stopped flowing\u2026 the energy\u2026 could
+    no longer gather\u2026"
+  textColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1639663229
 GameObject:
   m_ObjectHideFlags: 0
@@ -8813,7 +8806,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1272955126439743107, guid: 4be03d26df43bd14b803e467106a72a5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1913914771}
   m_SourcePrefab: {fileID: 100100000, guid: 4be03d26df43bd14b803e467106a72a5, type: 3}
 --- !u!4 &1913914769 stripped
 Transform:
@@ -8821,6 +8818,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1913914768}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1913914770 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1272955126439743107, guid: 4be03d26df43bd14b803e467106a72a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1913914768}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1913914771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913914770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df8e4d6874eeef47849ebb9048fa910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customMessage: "She\u2026 relied on these lights\u2026 to search for the elemental
+    stone\u2026"
+  textColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1922552072
 GameObject:
   m_ObjectHideFlags: 0

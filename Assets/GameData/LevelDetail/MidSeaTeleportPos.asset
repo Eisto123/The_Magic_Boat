@@ -15,10 +15,10 @@ MonoBehaviour:
   teleportPositions:
   - positionName: Start
     targetPos:
-      x: 103
+      x: 163
       y: 1.2
-      z: 81
+      z: -10
     targetRotation:
       x: 0
-      y: 110
+      y: -70
       z: 0
