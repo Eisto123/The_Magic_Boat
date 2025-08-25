@@ -68,7 +68,7 @@ public class SnapPoint : MonoBehaviour
     }
     void LateUpdate()
     {
-        if (followTarget != null && !hasTargetSetup)
+        if (followTarget != null && hasTargetSetup)
         {
             transform.position = followTarget.position;
         }

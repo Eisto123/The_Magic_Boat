@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class BGMManager : MonoBehaviour
@@ -19,61 +20,28 @@ public class BGMManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private Coroutine fadeCoroutine;
+    private Tween fadeTween;
     public void PlayBGM(int index)
     {
         if (bgmAudioSource.clip == bgmClips[index])
         {
             return;
         }
-        bgmAudioSource.clip = bgmClips[index];
+        if (fadeTween != null && fadeTween.IsActive()) fadeTween.Kill();
 
-        if (fadeCoroutine != null)
-        {
-            StopCoroutine(fadeCoroutine);
-        }
-        fadeCoroutine = StartCoroutine(FadeIn(bgmAudioSource, 1f));
+        bgmAudioSource.clip = bgmClips[index];
+        bgmAudioSource.volume = 0;
+        bgmAudioSource.Play();
+
+        fadeTween = bgmAudioSource.DOFade(1, 1f);
+    
     }
     public void FadeOutBGM()
     {
-        if (fadeCoroutine != null)
-        {
-            StopCoroutine(fadeCoroutine);
-        }
-        fadeCoroutine = StartCoroutine(FadeOut(bgmAudioSource, 2f));
+        if (fadeTween != null && fadeTween.IsActive()) fadeTween.Kill();
+        fadeTween = bgmAudioSource.DOFade(0, 1f).OnComplete(() => bgmAudioSource.Stop());
     }
 
-
-    private IEnumerator FadeOut(AudioSource audioSource, float fadeTime)
-    {
-        float startVolume = audioSource.volume;
-
-        while (audioSource.volume > 0)
-        {
-            audioSource.volume -= startVolume * Time.deltaTime / fadeTime;
-
-            yield return null;
-        }
-
-        audioSource.Stop();
-        audioSource.volume = startVolume;
-    }
-
-    private IEnumerator FadeIn(AudioSource audioSource, float fadeTime)
-    {
-        float targetVolume = 1;
-        audioSource.volume = 0;
-        audioSource.Play();
-
-        while (audioSource.volume < targetVolume)
-        {
-            audioSource.volume += targetVolume * Time.deltaTime / fadeTime;
-
-            yield return null;
-        }
-
-        audioSource.volume = targetVolume;
-    }
     
     
 }
