@@ -6,9 +6,8 @@ using UnityEngine;
 
 public class TeleportBoat : MonoBehaviour
 {
-    public GameObject teleportStonePrefab;
-    private GameObject teleportStone;
-    public Vector3 teleportStoneOffset = new Vector3(0, 0.1f, 0);
+    public GameObject teleportStone;
+    //public Vector3 teleportStoneOffset = new Vector3(0, 0.1f, 0);
     public SnapInteractor snapInteractor;
     public SnapInteractable boatDock;
 
@@ -46,11 +45,11 @@ public class TeleportBoat : MonoBehaviour
     }
     public void ShowTeleportStone()
     {
-        teleportStone = Instantiate(teleportStonePrefab, transform.position + teleportStoneOffset, Quaternion.identity);
+        teleportStone.SetActive(true);
     }
     public void HideTeleportStone()
     {
-        if (teleportStone == null) return;
+        if (!teleportStone.activeSelf) return;
         teleportStone?.GetComponent<TeleportStone>().HideStone();
     }
 

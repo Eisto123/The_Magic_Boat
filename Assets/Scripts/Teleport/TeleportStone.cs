@@ -8,8 +8,8 @@ public class TeleportStone : MonoBehaviour
 {
     public Material material;
     public float dissolveTime = 1f;
-    private float fullHeight = 1f;
-    private float zeroHeight = -1f;
+    private float fullHeight = 0.2f;
+    private float zeroHeight = -0.1f;
     public ObjectEventSO StartTeleportEvent;
 
     void OnEnable()
@@ -57,6 +57,6 @@ public class TeleportStone : MonoBehaviour
             yield return null;
         }
         material.SetFloat("_CutoffHeight", zeroHeight);
-        Destroy(gameObject, 1f); // Destroy after the hide animation
+        this.gameObject.SetActive(false);
     }
 }

@@ -21,13 +21,13 @@ MonoBehaviour:
     IsCompleted: 0
     RequireUIPanel: 1
     RequireAudio: 1
-  - ProgressName: Ecosystem Tank
+  - ProgressName: Ecosystem Tank Rotation
     ProgressDescription: This is an ecosystem tank. You can rotate it with one hand.
     ProgressIndex: 1
     IsCompleted: 0
     RequireUIPanel: 1
     RequireAudio: 1
-  - ProgressName: Ecosystem Tank
+  - ProgressName: Ecosystem Tank Scale
     ProgressDescription: You can change its size by using both of your hands
     ProgressIndex: 2
     IsCompleted: 0
@@ -40,7 +40,7 @@ MonoBehaviour:
     IsCompleted: 0
     RequireUIPanel: 1
     RequireAudio: 1
-  - ProgressName: Teleport point
+  - ProgressName: Teleport Point
     ProgressDescription: After picking up the boat. You can find teleport point in
       the tank. Drop the boat to the teleport point by release your hand near by
       the teleport point.

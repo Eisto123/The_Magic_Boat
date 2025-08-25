@@ -106,6 +106,8 @@ public class SceneLoadManager : MonoBehaviour
         //OVRrig.SetFollowBoat(true);
         SetBoatPositionBaseOnIndex(mapIndex, teleportIndex);
         passthroughLayer.textureOpacity = 0;
+
+        BGMManager.Instance.PlayBGM(0);
     }
     IEnumerator LoadARSceneProcess()
     {
@@ -158,6 +160,7 @@ public class SceneLoadManager : MonoBehaviour
         OVRrig.gameObject.transform.SetParent(null);
         //OVRrig.SetFollowBoat(false);
         passthroughLayer.textureOpacity = 1;
+        BGMManager.Instance.FadeOutBGM();
     }
 
 
