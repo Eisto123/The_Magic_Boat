@@ -15,6 +15,7 @@ public class RopeShoot : MonoBehaviour
     private GameObject currentAnchor;
     private float maxSelectAngle = 30f; // in degrees
     public GameObject reelPrefab;
+    public ParticleSystem spawnEffect;
     private Reel reelInstance;
     private float scanInterval = 0.2f;
     private float scanTimer = 0f;
@@ -78,7 +79,7 @@ public class RopeShoot : MonoBehaviour
                 Quaternion lookRotation = Quaternion.LookRotation(toAnchor, Vector3.up);
                 var GO = Instantiate(reelPrefab, instanciatePoint.position, lookRotation);
                 reelInstance = GO.GetComponent<Reel>();
-    
+                spawnEffect.Play();
             }
 
             if (shootTimerCoroutine != null)

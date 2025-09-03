@@ -28,6 +28,8 @@ public class Reel : MonoBehaviour
     private Coroutine wobbleCoroutine;
     private Rigidbody boatRB;
     private Coroutine destroyCoroutine;
+
+    public ParticleSystem shootEffect;
     void OnEnable()
     {
         lastWheelAngleX = wheel.localEulerAngles.x;
@@ -68,23 +70,20 @@ public class Reel : MonoBehaviour
         {
             if (boatRB != null)
             {
-                if (boatRB != null)
+                Vector3 toAnchor = anchor.position - boat.position;
+                Vector3 flatToAnchor = new Vector3(toAnchor.x, 0, toAnchor.z);
+                Vector3 boatForward = new Vector3(boat.forward.x, 0, boat.forward.z).normalized;
+
+                // Pull force only in the boat's forward direction, scaled by how well it's facing the anchor
+                float forwardDot = Vector3.Dot(boatForward, flatToAnchor.normalized);
+                float forceMagnitude = Mathf.Abs(deltaAngle) * pullForce * Mathf.Max(0, forwardDot);
+                boatRB.AddForce(boatForward * forceMagnitude, ForceMode.Force);
+
+                if (flatToAnchor.sqrMagnitude > 0.001f && boatForward.sqrMagnitude > 0.001f)
                 {
-                    Vector3 toAnchor = anchor.position - boat.position;
-                    Vector3 flatToAnchor = new Vector3(toAnchor.x, 0, toAnchor.z);
-                    Vector3 boatForward = new Vector3(boat.forward.x, 0, boat.forward.z).normalized;
-
-                    // Pull force only in the boat's forward direction, scaled by how well it's facing the anchor
-                    float forwardDot = Vector3.Dot(boatForward, flatToAnchor.normalized);
-                    float forceMagnitude = Mathf.Abs(deltaAngle) * pullForce * Mathf.Max(0, forwardDot);
-                    boatRB.AddForce(boatForward * forceMagnitude, ForceMode.Force);
-
-                    if (flatToAnchor.sqrMagnitude > 0.001f && boatForward.sqrMagnitude > 0.001f)
-                    {
-                        Quaternion targetRotation = Quaternion.LookRotation(flatToAnchor.normalized, Vector3.up);
-                        Quaternion newRotation = Quaternion.Slerp(boatRB.rotation, targetRotation, turnSpeed * Time.fixedDeltaTime);
-                        boatRB.MoveRotation(newRotation);
-                    }
+                    Quaternion targetRotation = Quaternion.LookRotation(flatToAnchor.normalized, Vector3.up);
+                    Quaternion newRotation = Quaternion.Slerp(boatRB.rotation, targetRotation, turnSpeed * Time.fixedDeltaTime);
+                    boatRB.MoveRotation(newRotation);
                 }
             }
         }
@@ -148,7 +147,7 @@ public class Reel : MonoBehaviour
             Vector3 end = currentAnchor.transform.position;
             lineRenderer.enabled = true;
             lineRenderer.positionCount = ropeSegments;
-
+            shootEffect.Play();
             // Start with all points at the start
             for (int i = 0; i < ropeSegments; i++)
                 lineRenderer.SetPosition(i, start);

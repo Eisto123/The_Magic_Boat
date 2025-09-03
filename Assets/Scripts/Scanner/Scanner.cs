@@ -19,16 +19,21 @@ public class Scanner : MonoBehaviour
     public Camera vrCamera;
     public GameObject CameraRig;
     public GameObject indicatorPrefab;
+    public ParticleSystem scanEffect;
     public TransformRecognizerActiveState leftWrist;
     private bool isScanning = false;
     private HashSet<Collectable> previouslyDetected = new HashSet<Collectable>();
     private List<(Vector3 center, Vector3 halfExtents, Quaternion rotation)> debugBoxes = new List<(Vector3, Vector3, Quaternion)>();
     private GameObject indicatorInstance;
+
     public void Scan()
     {
         isScanning = true;
-        Instantiate(indicatorPrefab, pointATransform.position, Quaternion.identity, pointATransform);
+        //Instantiate(indicatorPrefab, pointATransform.position, Quaternion.identity, pointATransform);
         // Implement the scanning logic here
+
+        scanEffect.Play();
+
         Debug.Log("Scanning...");
     }
 
@@ -48,12 +53,13 @@ public class Scanner : MonoBehaviour
             if(collectable == null) continue;
             if (!collectable.isCollected) collectable.StopCollect();
         }
+        scanEffect.Stop();
         previouslyDetected.Clear();
-        if (indicatorInstance != null)
-        {
-            Destroy(indicatorInstance);
-            indicatorInstance = null;
-        }
+        // if (indicatorInstance != null)
+        // {
+        //     Destroy(indicatorInstance);
+        //     indicatorInstance = null;
+        // }
         Debug.Log("Stopping scan...");
     }
 
@@ -75,7 +81,7 @@ public class Scanner : MonoBehaviour
         float depthDistance = volumeDepth / resolution;
         float k = Mathf.Tan(vrCamera.fieldOfView * 0.5f * Mathf.Deg2Rad);
         float centerDistance = Vector3.Distance(center, vrCamera.transform.position);
-        float heightPersentage = initialHeight / (centerDistance * k);
+        float heightPercentage = initialHeight*0.5f / (centerDistance * k);
 
         List<Collider> hits = new List<Collider>();
 
@@ -83,7 +89,7 @@ public class Scanner : MonoBehaviour
         {
             float currentDepth = i * depthDistance;
 
-            float boxHeight = currentDepth * k * heightPersentage;
+            float boxHeight = currentDepth * k * heightPercentage * 2f;
             float boxWidth = boxHeight * heightWidthPercentage;
 
             Vector3 scanCenter = center + vrCamera.transform.forward * currentDepth;
@@ -98,7 +104,7 @@ public class Scanner : MonoBehaviour
             hits.AddRange(boxHits);
         }
 
-        UpdateIndicatorPosition(center, Quaternion.LookRotation(vrCamera.transform.forward, up));
+        //UpdateIndicatorPosition(center, Quaternion.LookRotation(vrCamera.transform.forward, up));
         
         HashSet<Collectable> currentlyDetected = new HashSet<Collectable>();
 
@@ -112,7 +118,6 @@ public class Scanner : MonoBehaviour
                 {
                     collectable.StartCollect();
                 }
-                
             }
         }
 

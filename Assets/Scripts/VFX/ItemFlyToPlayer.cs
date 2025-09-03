@@ -6,6 +6,7 @@ public class ItemFlyToPlayer : MonoBehaviour
 {
     public Transform playerTransform;
     public GameObject collectEffectPrefab;
+    public GameObject collecttedStarEffectPrefab;
     public ObjectEventSO FlyToPlayerCompleteEvent;
 
     public float duration = 1.5f; // Duration of the fly animation
@@ -19,7 +20,7 @@ public class ItemFlyToPlayer : MonoBehaviour
     private IEnumerator FlyToPlayerRoutine(Vector3 startPosition, Vector3 endPosition)
     {
         GameObject effect = Instantiate(collectEffectPrefab, startPosition, Quaternion.identity);
-
+        GameObject getEffect = Instantiate(collecttedStarEffectPrefab, startPosition, Quaternion.identity);
         // Make curve more dramatic and gentle
         Vector3 direction = (endPosition - startPosition).normalized;
         Vector3 randomDir = Quaternion.AngleAxis(Random.Range(-90f, 90f), Vector3.up) * direction; // wider angle
@@ -48,5 +49,6 @@ public class ItemFlyToPlayer : MonoBehaviour
         effect.transform.position = endPosition;
         FlyToPlayerCompleteEvent.RaiseEvent(null, this);
         Destroy(effect);
+        Destroy(getEffect);
     }
 }

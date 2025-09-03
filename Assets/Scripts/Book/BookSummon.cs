@@ -22,6 +22,7 @@ public class BookSummon : MonoBehaviour
     private float summonTimer = 0f;
     private bool duringSummon = false;
     private bool summonComplete = false;
+    public ParticleSystem summonEffect;
 
     void OnEnable()
     {
@@ -46,6 +47,7 @@ public class BookSummon : MonoBehaviour
                 Debug.LogWarning("Book is already summoned.");
                 return;
             }
+            summonEffect.Play();
             StartCoroutine(SetUpSummon());
 
         }
@@ -116,6 +118,7 @@ public class BookSummon : MonoBehaviour
         }
         if (summonComplete)
         {
+            summonEffect.Stop();
             Book.SetActive(true);
             Book.transform.position = summonPoint.position + summonPoint.forward * 0.4f;
             Book.transform.LookAt(Book.transform.position + (Book.transform.position - summonPoint.position));
@@ -131,6 +134,7 @@ public class BookSummon : MonoBehaviour
         summonComplete = false;
         duringSummon = false;
         summonTimer = 0f;
+        summonEffect.Stop();
         if (summonProgressSlider != null)
         {
             summonProgressSlider.value = 0f; // Reset the slider

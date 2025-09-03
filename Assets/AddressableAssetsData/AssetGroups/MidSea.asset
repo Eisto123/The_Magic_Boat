@@ -17,43 +17,18 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: a3309a247a0b06846a5cba84e7171089
   m_SerializeEntries:
-  - m_GUID: 44b0712be1b44f6429375aa09bdef247
-    m_Address: AR
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5c5d200cba3581644b1eaa246314995a
-    m_Address: Assets/Scenes/MidBreakDown/MidSea_VFX.unity
+    m_Address: MidSea_VFX
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 669210678e6b63d4d87ab41fdeb16505
-    m_Address: Assets/Scenes/MidBreakDown/MidSea_Decoration.unity
+    m_Address: MidSea_Decoration
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 93f336e0756287c4a9a3359e81a6d2bb
-    m_Address: Assets/Scenes/MidBreakDown/MidSea_Landscape.unity
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: bb2bb209c12993b41a6072e122f3a2ce
-    m_Address: VRLevel 4
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: dc5d6f2d36e8c2f44841e426c8567c90
-    m_Address: VRLevel 3
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f34285a380c35594eac85ec60663e75d
-    m_Address: VRLevel 1
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f426b6c3811b05e4aad6946f221379f5
-    m_Address: VRLevel 2
+    m_Address: MidSea_Landscape
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
