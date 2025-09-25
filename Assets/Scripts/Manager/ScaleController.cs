@@ -16,9 +16,6 @@ public class ScaleController : MonoBehaviour
     public Transform basePoint;
     public ObjectEventSO ModelResetCompleteEvent;
     public StringEventSO tutorialCompleteEvent;
-
-
-
     private Quaternion lastRotation;
     private Vector3 lastScale;
 
@@ -38,17 +35,15 @@ public class ScaleController : MonoBehaviour
         waterLevel.transform.localScale = waterScale;
 
         // --- Tutorial Step: Detect Rotation Change ---
-        if (!GameFlowManager.rotationStepComplete && Quaternion.Angle(transform.rotation, lastRotation) > 10f) // 10 degrees threshold
+        if (GameFlowManager.Instance.currentProgress.ProgressIndex == 1 && Quaternion.Angle(transform.rotation, lastRotation) > 10f) // 10 degrees threshold
         {
-            GameFlowManager.rotationStepComplete = true;
-            tutorialCompleteEvent.RaiseEvent("Ecosystem Tank Rotation",this);
+            tutorialCompleteEvent.RaiseEvent("Rotation",this);
         }
 
         // --- Tutorial Step: Detect Scale Change ---
-        if (!GameFlowManager.scaleStepComplete && (transform.localScale - lastScale).sqrMagnitude > 0.001f)
+        if (GameFlowManager.Instance.currentProgress.ProgressIndex == 2 && (transform.localScale - lastScale).sqrMagnitude > 0.001f)
         {
-            GameFlowManager.scaleStepComplete = true;
-            tutorialCompleteEvent.RaiseEvent("Ecosystem Tank Scale",this);
+            tutorialCompleteEvent.RaiseEvent("Scale",this);
         }
     
     }

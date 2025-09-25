@@ -18,39 +18,45 @@ MonoBehaviour:
       a controller. Please make sure you put down your controller and see the hand
       outline with Hand Tracking.
     ProgressIndex: 0
-    IsCompleted: 0
+    IsCompleted: 1
     RequireUIPanel: 1
     RequireAudio: 1
-  - ProgressName: Ecosystem Tank Rotation
+    ProceedWithButton: 1
+  - ProgressName: Rotation
     ProgressDescription: This is an ecosystem tank. You can rotate it with one hand.
     ProgressIndex: 1
-    IsCompleted: 0
+    IsCompleted: 1
     RequireUIPanel: 1
     RequireAudio: 1
-  - ProgressName: Ecosystem Tank Scale
+    ProceedWithButton: 0
+  - ProgressName: Scale
     ProgressDescription: You can change its size by using both of your hands
     ProgressIndex: 2
-    IsCompleted: 0
+    IsCompleted: 1
     RequireUIPanel: 1
     RequireAudio: 1
+    ProceedWithButton: 0
   - ProgressName: The Boat
     ProgressDescription: You can find the boat in the right side of the Tank. You
       can grab it using your hand.
     ProgressIndex: 3
-    IsCompleted: 0
+    IsCompleted: 1
     RequireUIPanel: 1
     RequireAudio: 1
+    ProceedWithButton: 0
   - ProgressName: Teleport Point
     ProgressDescription: After picking up the boat. You can find teleport point in
       the tank. Drop the boat to the teleport point by release your hand near by
       the teleport point.
     ProgressIndex: 4
-    IsCompleted: 0
+    IsCompleted: 1
     RequireUIPanel: 1
     RequireAudio: 1
+    ProceedWithButton: 0
   - ProgressName: Teleport Stone
     ProgressDescription: Hover the teleport stone to start teleportation.
     ProgressIndex: 5
-    IsCompleted: 0
+    IsCompleted: 1
     RequireUIPanel: 1
     RequireAudio: 1
+    ProceedWithButton: 0

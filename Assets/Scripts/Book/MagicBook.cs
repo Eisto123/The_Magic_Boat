@@ -1,6 +1,8 @@
 
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class MagicBook : MonoBehaviour
 {
@@ -9,7 +11,8 @@ public class MagicBook : MonoBehaviour
 
     [Header("Magic Book UI")]
     public MagicBookUI magicBookUI;
-
+    private int currentBookIndex;
+    public List<PlayableDirector> pageturnDirectors;
 
     void OnEnable()
     {
@@ -33,19 +36,49 @@ public class MagicBook : MonoBehaviour
 
     public void SetUpBookUI(int bookIndex)
     {
+        magicBookUI.FadeUI(false, 1f);
         if (bookIndex < 0 || bookIndex >= magicBookData.bookDatas.Count)
         {
             Debug.LogWarning("Invalid book index: " + bookIndex);
             return;
         }
 
-        BookData bookData = magicBookData.bookDatas[bookIndex];
-        magicBookUI.UpdateBookUI(bookData);
+        int pageDelta = bookIndex - currentBookIndex;
+        if (pageDelta != 0)
+        {
+            int absDelta = Mathf.Abs(pageDelta);
+            absDelta = Mathf.Clamp(absDelta, 1, 3);
+
+            PlayableDirector director = null;
+            if (pageDelta > 0)
+                director = pageturnDirectors[absDelta - 1]; // forward
+            else
+                director = pageturnDirectors[absDelta + 2]; // backward
+
+            director.stopped += OnDirectorStopped;
+            director.Play();
+            UpdateBookUIAfterTurn(bookIndex);
+        }
+        else
+        {
+            UpdateBookUIAfterTurn(bookIndex);
+        }
     }
 
-    public void UpdateBookUI()
+
+    private void OnDirectorStopped(PlayableDirector director)
     {
-        int bookIndex = SceneLoadManager.mapIndex;
-        SetUpBookUI(bookIndex);
+        director.stopped -= OnDirectorStopped;
+        UpdateBookUIAfterTurn(currentBookIndex);
     }
+
+
+    private void UpdateBookUIAfterTurn(int bookIndex)
+    {
+        magicBookUI.FadeUI(true, 1f);
+        BookData bookData = magicBookData.bookDatas[bookIndex];
+        magicBookUI.UpdateBookUI(bookData);
+        currentBookIndex = bookIndex;
+    }
+
 }

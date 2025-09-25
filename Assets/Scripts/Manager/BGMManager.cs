@@ -39,7 +39,7 @@ public class BGMManager : MonoBehaviour
     public void FadeOutBGM()
     {
         if (fadeTween != null && fadeTween.IsActive()) fadeTween.Kill();
-        fadeTween = bgmAudioSource.DOFade(0, 1f).OnComplete(() => bgmAudioSource.Stop());
+        fadeTween = bgmAudioSource.DOFade(0, 2f).OnComplete(() => bgmAudioSource.Stop());
     }
 
     

@@ -12,15 +12,14 @@ public class GameFlowManager : MonoBehaviour
     [Header("Tutorial Sequence Data")]
     public TutorialSequenceData tutorialSequenceData;
     public ObjectEventSO tutorialProgressEvent;
-    private ProgressInfo currentProgress;
+    public ProgressInfo currentProgress;
     private int currentProgressIndex = 0;
 
     [Header("Tutorial Step Completion Flags")]
-    public static bool rotationStepComplete = false;
-    public static bool scaleStepComplete = false;
     private bool boatStepComplete = false;
     private bool snapStepComplete = false;
     private bool teleportStoneComplete = false;
+    public GameObject StartPanel;
 
 
     private void Awake()
@@ -44,13 +43,17 @@ public class GameFlowManager : MonoBehaviour
             Debug.LogError("TutorialSequenceData is not assigned in GameFlowManager.");
         }
     }
-    void Start()
+    public void OnStartButtonClick()
     {
         ResetCollectables();
         if (tutorialSequenceData != null && tutorialSequenceData.progressInfos.Count > 0)
         {
             currentProgress = tutorialSequenceData.progressInfos[0];
             InvokeTutorialProgress(currentProgress);
+        }
+        if (StartPanel != null)
+        {
+            StartPanel.SetActive(false);
         }
     }
 
@@ -78,6 +81,10 @@ public class GameFlowManager : MonoBehaviour
         if (progressInfo != null)
         {
             tutorialProgressEvent.RaiseEvent(progressInfo, this);
+        }
+        if (progressInfo.ProgressIndex == 1)
+        {
+            SceneLoadManager.instance.LoadARScene();
         }
     }
     public void UpdateTutorialProgress(string completedTaskName)
@@ -116,7 +123,7 @@ public class GameFlowManager : MonoBehaviour
 
     public void OnBoatPickedUp()
     {
-        if (scaleStepComplete && !boatStepComplete)
+        if (currentProgress.ProgressIndex == 3 && !boatStepComplete)
         {
             boatStepComplete = true;
             UpdateTutorialProgress("The Boat");

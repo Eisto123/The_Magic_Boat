@@ -17,5 +17,6 @@ public class ProgressInfo
     public bool IsCompleted;
     public bool RequireUIPanel;
     public bool RequireAudio;
+    public bool ProceedWithButton;
 }
 

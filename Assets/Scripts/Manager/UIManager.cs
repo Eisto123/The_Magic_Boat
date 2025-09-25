@@ -20,13 +20,13 @@ public class UIManger : MonoBehaviour
     public Transform panelCenterPos;
     public Transform panelLeftPos;
     private Transform cameraTransform;
+    public StringEventSO tutorialCompleteEvent;
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -60,10 +60,20 @@ public class UIManger : MonoBehaviour
         }
     }
 
+    public void HideTutorialPanel()
+    {
+        tutorialPanel.gameObject.SetActive(false);
+    }
+    private void ProceedProcess(string progressName)
+    {
+        tutorialCompleteEvent.RaiseEvent(progressName, this);
+    }
+    
+
     public void UpdateTutorialPanel(object progress)
     {
         ProgressInfo progressInfo = progress as ProgressInfo;
-        
+
         if (progressInfo != null)
         {
             if (!progressInfo.RequireUIPanel)
@@ -71,22 +81,34 @@ public class UIManger : MonoBehaviour
                 tutorialPanel.gameObject.SetActive(false);
                 return;
             }
-            tutorialPanel.gameObject.SetActive(true);
-            if (progressInfo.ProgressIndex == 0)
+
+            tutorialPanel.proceedbutton.onClick.RemoveAllListeners();
+
+            if (progressInfo.ProceedWithButton)
             {
-                tutorialPanel.transform.position = panelCenterPos.position;
-                tutorialPanel.transform.rotation = panelCenterPos.rotation;
+                tutorialPanel.proceedbutton.onClick.AddListener(() =>
+                {
+                    ProceedProcess(progressInfo.ProgressName);
+                });
+            }
+
+            tutorialPanel.gameObject.SetActive(true);
+            tutorialPanel.transform.position = panelCenterPos.position;
+            tutorialPanel.transform.rotation = panelCenterPos.rotation;
+            if (progressInfo.ProgressIndex == 1)
+            {
+                tutorialPanel.SetupUI(progressInfo.ProgressName, progressInfo.ProgressDescription,true,0);
+            }
+            else if (progressInfo.ProgressIndex == 2)
+            {
+                tutorialPanel.SetupUI(progressInfo.ProgressName, progressInfo.ProgressDescription, true, 1);
+            }
+            else if (progressInfo.ProgressIndex == 3)
+            {
+                tutorialPanel.SetupUI(progressInfo.ProgressName, progressInfo.ProgressDescription, true, 2);
             }
             else
-            {
-                if (tutorialPanel.transform.position != panelLeftPos.position)
-                {
-                    tutorialPanel.transform.DOMove(panelLeftPos.position, 1f).SetEase(Ease.OutBack);
-                    tutorialPanel.transform.DORotateQuaternion(panelLeftPos.rotation, 1f).SetEase(Ease.OutBack);
-                }
-            
-            }
-            tutorialPanel.SetupUI(progressInfo.ProgressName, progressInfo.ProgressDescription);
+                tutorialPanel.SetupUI(progressInfo.ProgressName, progressInfo.ProgressDescription, false);
         }
         else
         {

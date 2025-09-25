@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class MagicBookUI : MonoBehaviour
 {
@@ -15,8 +16,13 @@ public class MagicBookUI : MonoBehaviour
     public TMP_Text collectablesDescriptionText;
     public Image collectablesImage;
     public Toggle collectablesToggle;
+    public CanvasGroup canvasGroup;
 
-
+    public void FadeUI(bool fadeIn, float duration)
+    {
+        float targetAlpha = fadeIn ? 1f : 0f;
+        canvasGroup.DOFade(targetAlpha, duration).SetEase(Ease.InOutSine);
+    }
     public void UpdateBookUI(BookData bookData)
     {
         if (bookData == null) return;

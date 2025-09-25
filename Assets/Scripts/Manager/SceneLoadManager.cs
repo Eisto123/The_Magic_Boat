@@ -18,6 +18,7 @@ public class SceneLoadManager : MonoBehaviour
     public List<LevelTeleportPosSO> LevelTeleportPositions;
     public GameObject Boat;
     public CameraRigManager OVRrig;
+    public SFXManager sfxManager;
 
     [Header("FadeMask")]
     public GameObject WhiteFadeMask;
@@ -41,22 +42,10 @@ public class SceneLoadManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    void Start()
+
+    public void LoadARScene()
     {
-        StartCoroutine(StartHoldingTime());
-
-    }
-
-    private IEnumerator StartHoldingTime()
-    {
-        if (!skipTutorial)
-            yield return new WaitForSeconds(15f);
-
-        else
-            yield return null;
         LoadScene(ARMode);
-        currentScene = ARMode;
-        TutorialCompleteEvent.RaiseEvent("Welcome",this);
     }
     public void ToggleScene()
     {
@@ -88,6 +77,7 @@ public class SceneLoadManager : MonoBehaviour
     }
     IEnumerator LoadVRSceneProcess()
     {
+        sfxManager.PlaySFX(0);
         var s = currentScene.LoadSceneAsync(LoadSceneMode.Additive);
         yield return new WaitUntil(() => s.IsDone);
 
